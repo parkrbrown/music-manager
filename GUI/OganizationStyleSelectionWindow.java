@@ -1,5 +1,6 @@
-package music-manager.GUI;
+package GUI;
 
-public class OganizationStyleSelectionWindow {
+public class OganizationStyleSelectionWindow
+{
     
 }

@@ -1,5 +1,6 @@
 package GUI;
 
-public class TagEditWindow {
+public class TagEditWindow
+{
     
 }

@@ -1,4 +1,4 @@
-package music-manager.ProgramControl;
+package ProgramControl;
 
 public class FileController {
     
