@@ -3,5 +3,7 @@ package ProgramControl;
 import GUI.FileFormatSelectionWindow;
 
 public class MainController {
-    FileFormatSelectionWindow FFSW = new FileFormatSelectionWindow();
+    MainMenu MainMenu = new MainMenu();
+	FileFormatSelectionWindow FFSW = new FileFormatSelectionWindow();
+    
 }
