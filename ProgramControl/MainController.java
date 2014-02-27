@@ -1,9 +1,9 @@
-package ProgramControl;
+package music-manager.ProgramControl;
 
 import GUI.FileFormatSelectionWindow;
 
 public class MainController {
     MainMenu MainMenu = new MainMenu();
-	FileFormatSelectionWindow FFSW = new FileFormatSelectionWindow();
+    FileFormatSelectionWindow FFSW = new FileFormatSelectionWindow();
     
 }
