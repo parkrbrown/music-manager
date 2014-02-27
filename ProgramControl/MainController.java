@@ -1,6 +1,4 @@
-package music
-
--manager.ProgramControl;
+package music-manager.ProgramControl;
 
 import GUI.FileFormatSelectionWindow;
 import GUI.MainMenu;
