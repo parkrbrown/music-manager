@@ -30,12 +30,12 @@ public class MP3
 		if(this.mp3.hasId3v2Tag())
 		{
 			this.ID3v2Tag = mp3.getId3v2Tag();
-			this.ID3v2Tag = null;
+			this.ID3v1Tag = null;
 		}
 		else if(this.mp3.hasId3v1Tag())
 		{
 			this.ID3v1Tag = mp3.getId3v1Tag();
-			this.ID3v1Tag = null;
+			this.ID3v2Tag = null;
 		}
 		else
 		{
