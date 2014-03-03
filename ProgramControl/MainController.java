@@ -1,5 +1,7 @@
 package ProgramControl;
 
+import java.io.File;
+
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import GUI.FileFormatSelectionWindow;
@@ -13,6 +15,8 @@ public class MainController {
     FileFormatSelectionWindow FFSW = new FileFormatSelectionWindow();
     TagEditWindow TEW = new TagEditWindow();
     
+    private File selectedDirectory;
+    
     public FileNameExtensionFilter FileFilter = new FileNameExtensionFilter("MP3 Music Files", "mp3");
     
     public static void main (String[] args){
@@ -24,4 +28,12 @@ public class MainController {
     	// display main window
     	// wait for selections
     }
+
+	public File getSelectedDirectory() {
+		return selectedDirectory;
+	}
+
+	public void setSelectedDirectory(File selectedDirectory) {
+		this.selectedDirectory = selectedDirectory;
+	}
 }
