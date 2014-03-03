@@ -24,6 +24,7 @@ public class MainController {
     }
     
     private static void runApp(){
+    	// int all gui elements
     	// start program
     	// display main window
     	// wait for selections
