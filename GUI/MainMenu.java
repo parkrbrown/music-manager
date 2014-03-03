@@ -31,7 +31,7 @@ public class MainMenu extends JFrame implements ActionListener
     	this.View = new JMenu("View");
     	this.Help = new JMenu("Help");
     	
-    	this.CurrentDirectory = new JTextArea(TODO MainController.CurrentDirectory.toString());
+    	this.CurrentDirectory = new JTextArea(/*TODO MainController.CurrentDirectory.toString()*/);
     	this.Browse = new JButton("Change...");
     	
     	this.Format = new JButton("<html><center>Format MP3 FileNames</center></html>");

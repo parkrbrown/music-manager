@@ -27,6 +27,9 @@ public class MainController {
     	// start program
     	// display main window
     	// wait for selections
+    	
+    	MainMenu MM = new MainMenu();
+    	MM.setVisible(true);
     }
 
 	public File getSelectedDirectory() {
