@@ -5,11 +5,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JTextArea;
-
-import ProgramControl.MainController;
 
 @SuppressWarnings("serial")
 public class MainMenu extends JFrame implements ActionListener
@@ -17,6 +16,7 @@ public class MainMenu extends JFrame implements ActionListener
 	private JMenuBar MenuBar;
 	private JMenu File, Edit, View, Help;
     private JTextArea CurrentDirectory;
+    private JLabel CurDir;
     private JButton Browse, Format, EditTags, Organize, Quit;
     
     public MainMenu()
@@ -33,6 +33,7 @@ public class MainMenu extends JFrame implements ActionListener
     	
     	this.CurrentDirectory = new JTextArea(/*TODO MainController.CurrentDirectory.toString()*/);
     	this.Browse = new JButton("Change...");
+    	this.CurDir = new JLabel("Current Directory:");
     	
     	this.Format = new JButton("<html><center>Format MP3 FileNames</center></html>");
     	this.EditTags = new JButton("<html><center>Edit ID3 Tags</center></html>");
@@ -51,8 +52,9 @@ public class MainMenu extends JFrame implements ActionListener
     	
     	
     	//Sets the location for each element
-    	this.CurrentDirectory.setBounds(15, 15, 325, 25);
-    	this.Browse.setBounds(350, 15, 90, 25);
+    	this.CurrentDirectory.setBounds(15, 25, 325, 25);
+    	this.Browse.setBounds(350, 25, 90, 25);
+    	this.CurDir.setBounds(15, 5, 325, 15);
     	
     	this.Format.setBounds(15, 75, 150, 75);
     	this.EditTags.setBounds(15, 175, 150, 75);
@@ -73,6 +75,7 @@ public class MainMenu extends JFrame implements ActionListener
     	
     	this.add(CurrentDirectory);
     	this.add(Browse);
+    	this.add(CurDir);
     	
     	this.add(Format);
     	this.add(EditTags);
@@ -89,9 +92,15 @@ public class MainMenu extends JFrame implements ActionListener
     }
 
 	@Override
-	public void actionPerformed(ActionEvent event) 
+	public void actionPerformed(ActionEvent e) 
 	{
-		if (event.getActionCommand() == "Quit") {
+		if(false/*temp*/)
+		{
+			
+		}
+		
+		else if(e.getSource() == Quit)
+		{
 			System.exit(0);
 		}
 	}
