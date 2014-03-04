@@ -35,5 +35,10 @@ public class TagEditor implements FileController {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void updateTag(/*tag*/){
+		// removeTag();
+		// writeTag();
+	}
 
 }

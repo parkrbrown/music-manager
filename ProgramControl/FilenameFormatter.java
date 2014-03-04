@@ -35,5 +35,9 @@ public class FilenameFormatter implements FileController {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void format(/*newFormat*/){
+		// TODO regex
+	}
 
 }

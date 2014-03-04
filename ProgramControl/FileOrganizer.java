@@ -35,5 +35,9 @@ public class FileOrganizer implements FileController {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void moveFile(/*String oldPath, String newPath*/){
+		// TODO move file from oldPath to newPath
+	}
 
 }
