@@ -1,6 +1,5 @@
 package ProgramControl;
 
-import java.io.File;
 import java.io.IOException;
 
 import mp3agic.*;
@@ -16,5 +15,5 @@ public interface FileController {
     void saveFile(String file) throws UnsupportedTagException, InvalidDataException, IOException, NotSupportedException;
     
     void removeTags(String file) throws UnsupportedTagException, InvalidDataException, IOException, NotSupportedException;
-    
+    //Not sure if we need this one;
 }
