@@ -30,4 +30,10 @@ public class TagEditor implements FileController {
 
 	}
 
+	@Override
+	public void findTagVersion() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

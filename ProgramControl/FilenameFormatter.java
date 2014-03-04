@@ -30,4 +30,10 @@ public class FilenameFormatter implements FileController {
 
 	}
 
+	@Override
+	public void findTagVersion() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

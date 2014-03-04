@@ -10,6 +10,9 @@ public interface FileController {
 	void updateDirectory(String directory);
 		//Or file
 	
+	void findTagVersion();
+	// TODO
+	
     void saveFile(String file) throws UnsupportedTagException, InvalidDataException, IOException, NotSupportedException;
     
     void removeTags(String file) throws UnsupportedTagException, InvalidDataException, IOException, NotSupportedException;
