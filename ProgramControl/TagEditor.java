@@ -32,7 +32,7 @@ public class TagEditor implements FileController {
 
 	@Override
 	public void findTagVersion() {
-		// TODO Auto-generated method stub
+		// TODO Add method to find tagVersion from MP3 class
 		
 	}
 	
