@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,6 +25,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     private JLabel CurDir;
     private JButton Browse, Add, Remove, Up, Down, Return;
     private JList Sort, Ignore;
+    private String SortSelectedItem, IgnoreSelectedItem;
     
     public FileFormatSelectionWindow()
     {
@@ -75,7 +77,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     		{
     			if(!e.getValueIsAdjusting())
     			{
-    				//TODO
+    				SortSelectedItem = (String)Sort.getSelectedValue();
     			}
     		}
     	});
@@ -87,7 +89,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     		{
     			if(!e.getValueIsAdjusting())
     			{
-    				//TODO
+    				IgnoreSelectedItem = (String)Ignore.getSelectedValue();
     			}
     		}
     	});
@@ -149,5 +151,18 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
 	{
 		// TODO Auto-generated method stub
 		
+	}
+	
+	
+	public ArrayList<String> getFormatOrder()
+	{
+		ArrayList<String> ItemsInOrder = new ArrayList<String>();
+		int i = 0;
+		while(((String.valueOf(Sort.getComponent(i)) != null) || ((String.valueOf(Sort.getComponent(i)) != ""))))
+		{
+			ItemsInOrder.add(String.valueOf(Sort.getComponent(i)));
+			i++;
+		}
+		return ItemsInOrder;
 	}
 }

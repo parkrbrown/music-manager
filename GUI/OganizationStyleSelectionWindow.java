@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,6 +25,7 @@ public class OganizationStyleSelectionWindow extends JFrame implements ActionLis
     private JLabel CurDir;
     private JButton Browse, Add, Remove, Up, Down, Return;
     private JList Order, Exclude;
+    private String OrderSelectedItem, ExcludeSelectedItem;
     
     public OganizationStyleSelectionWindow()
     {
@@ -75,7 +77,7 @@ public class OganizationStyleSelectionWindow extends JFrame implements ActionLis
     		{
     			if(!e.getValueIsAdjusting())
     			{
-    				//TODO
+    				OrderSelectedItem = (String)Order.getSelectedValue();
     			}
     		}
     	});
@@ -87,7 +89,7 @@ public class OganizationStyleSelectionWindow extends JFrame implements ActionLis
     		{
     			if(!e.getValueIsAdjusting())
     			{
-    				//TODO
+    				ExcludeSelectedItem = (String)Order.getSelectedValue();
     			}
     		}
     	});
@@ -149,5 +151,19 @@ public class OganizationStyleSelectionWindow extends JFrame implements ActionLis
 	{
 		// TODO Auto-generated method stub
 		
+	}
+	
+	
+	
+	public ArrayList<String> getOrganizationOrder()
+	{
+		ArrayList<String> ItemsInOrder = new ArrayList<String>();
+		int i = 0;
+		while(((String.valueOf(Order.getComponent(i)) != null) || ((String.valueOf(Order.getComponent(i)) != ""))))
+		{
+			ItemsInOrder.add(String.valueOf(Order.getComponent(i)));
+			i++;
+		}
+		return ItemsInOrder;
 	}
 }

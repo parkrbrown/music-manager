@@ -119,7 +119,6 @@ public class TagEditWindow extends JFrame implements ActionListener
     	this.add(Confirm);
     	
     	
-    	
     	//Sets the window title, size, default for closing & sets it to open in the middle of the screen
 		this.setTitle("Tag Edit");
 		this.setSize(475, 300);
@@ -132,5 +131,87 @@ public class TagEditWindow extends JFrame implements ActionListener
 	{
 		// TODO Auto-generated method stub
 		
+	}
+	
+	
+
+	public JCheckBox getArtist() {
+		return Artist;
+	}
+
+	public JCheckBox getAlbum() {
+		return Album;
+	}
+
+	public JCheckBox getGenre() {
+		return Genre;
+	}
+
+	public JCheckBox getYear() {
+		return Year;
+	}
+
+	public JCheckBox getEtc() {
+		return Etc;
+	}
+
+	public JTextArea getTArtist() {
+		return TArtist;
+	}
+
+	public JTextArea getTAlbum() {
+		return TAlbum;
+	}
+
+	public JTextArea getTGenre() {
+		return TGenre;
+	}
+
+	public JTextArea getTYear() {
+		return TYear;
+	}
+
+	public JTextArea getTEtc() {
+		return TEtc;
+	}
+
+	public void setArtist(JCheckBox artist) {
+		Artist = artist;
+	}
+
+	public void setAlbum(JCheckBox album) {
+		Album = album;
+	}
+
+	public void setGenre(JCheckBox genre) {
+		Genre = genre;
+	}
+
+	public void setYear(JCheckBox year) {
+		Year = year;
+	}
+
+	public void setEtc(JCheckBox etc) {
+		Etc = etc;
+	}
+
+	public void setTArtist(JTextArea tArtist) {
+		TArtist = tArtist;
+	}
+
+	public void setTAlbum(JTextArea tAlbum) {
+		TAlbum = tAlbum;
+	}
+
+	public void setTGenre(JTextArea tGenre) {
+		TGenre = tGenre;
+	}
+
+	public void setTYear(JTextArea tYear) {
+		TYear = tYear;
+	}
+
+	public void setTEtc(JTextArea tEtc) {
+		TEtc = tEtc;
 	}
 }
