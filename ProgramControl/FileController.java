@@ -4,11 +4,16 @@ import java.io.IOException;
 
 import mp3agic.*;
 
-public interface FileController {	
-	void findTagVersion(Mp3File MP3);
-	// TODO
+public class FileController {	
+	void findTagVersion(Mp3File MP3) {
+		// TODO
+	}
 	
-    void saveFile(String file) throws UnsupportedTagException, InvalidDataException, IOException, NotSupportedException;
+    void saveFile(String file) throws UnsupportedTagException, InvalidDataException, IOException, NotSupportedException {
+    	//TODO
+    }
     
-    void findMP3s();
+    void findMP3s() {
+    	//TODO
+    }
 }
