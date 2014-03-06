@@ -10,6 +10,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JTextArea;
 
+import ProgramControl.MainController;
+
 @SuppressWarnings("serial")
 public class MainMenu extends JFrame implements ActionListener
 {
@@ -31,7 +33,7 @@ public class MainMenu extends JFrame implements ActionListener
     	this.View = new JMenu("View");
     	this.Help = new JMenu("Help");
     	
-    	this.CurrentDirectory = new JTextArea(/*TODO MainController.CurrentDirectory.toString()*/);
+    	this.CurrentDirectory = new JTextArea(MainController.CurrentDirectory.toString());
     	this.Browse = new JButton("Change...");
     	this.CurDir = new JLabel("Current Directory:");
     	
@@ -94,12 +96,7 @@ public class MainMenu extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(false/*temp*/)
-		{
-			
-		}
-		
-		else if(e.getSource() == Quit)
+		if(e.getSource() == Quit)
 		{
 			System.exit(0);
 		}

@@ -13,6 +13,8 @@ import javax.swing.JTextArea;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import ProgramControl.MainController;
+
 @SuppressWarnings({"serial", "rawtypes", "unchecked"})
 public class OganizationStyleSelectionWindow extends JFrame implements ActionListener
 {
@@ -35,7 +37,7 @@ public class OganizationStyleSelectionWindow extends JFrame implements ActionLis
     	this.View = new JMenu("View");
     	this.Help = new JMenu("Help");
     	
-    	this.CurrentDirectory = new JTextArea(/*TODO MainController.CurrentDirectory.toString()*/);
+    	this.CurrentDirectory = new JTextArea(MainController.CurrentDirectory.toString());
     	this.Browse = new JButton("Change...");
     	this.CurDir = new JLabel("Current Directory:");
     	

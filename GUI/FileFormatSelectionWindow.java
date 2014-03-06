@@ -13,7 +13,9 @@ import javax.swing.JTextArea;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-@SuppressWarnings({"serial", "rawtypes"})
+import ProgramControl.MainController;
+
+@SuppressWarnings({"serial", "rawtypes", "unchecked"})
 public class FileFormatSelectionWindow extends JFrame implements ActionListener
 {
 	private JMenuBar MenuBar;
@@ -35,7 +37,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     	this.View = new JMenu("View");
     	this.Help = new JMenu("Help");
     	
-    	this.CurrentDirectory = new JTextArea(/*TODO MainController.CurrentDirectory.toString()*/);
+    	this.CurrentDirectory = new JTextArea(MainController.CurrentDirectory.toString());
     	this.Browse = new JButton("Change...");
     	this.CurDir = new JLabel("Current Directory:");
     	

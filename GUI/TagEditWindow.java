@@ -11,6 +11,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JTextArea;
 
+import ProgramControl.MainController;
+
 @SuppressWarnings("serial")
 public class TagEditWindow extends JFrame implements ActionListener
 {
@@ -34,7 +36,7 @@ public class TagEditWindow extends JFrame implements ActionListener
     	this.View = new JMenu("View");
     	this.Help = new JMenu("Help");
     	
-    	this.CurrentDirectory = new JTextArea(/*TODO MainController.CurrentDirectory.toString()*/);
+    	this.CurrentDirectory = new JTextArea(MainController.CurrentDirectory.toString());
     	this.Browse = new JButton("Change...");
     	this.CurDir = new JLabel("Current Directory:");
     	
