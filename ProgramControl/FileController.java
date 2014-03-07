@@ -1,7 +1,11 @@
 package ProgramControl;
 
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import mp3agic.ID3v1Tag;
 import mp3agic.InvalidDataException;
@@ -21,9 +25,31 @@ public class FileController {
 		//TODO
 	}
 	
-    void saveFile(File CurrentFile, File NewLocation) {
-    	//Removes Old Files & Re-saves/Saves files to proper location
-    	//TODO
+    void saveFile(File CurrentFile, File NewLocation, Mp3File FileToSave)
+    {
+    	try
+		{
+			Mp3File Moving = new Mp3File(CurrentFile.getAbsolutePath());
+			Moving.save(Moving.getFilename());
+		}
+		catch (NotSupportedException | IOException | UnsupportedTagException | InvalidDataException e)
+		{
+			// TODO
+		}
+		
+		if(!(NewLocation.exists()))
+		{
+			NewLocation.mkdirs();
+		}
+		
+		try
+		{
+			Files.move((Paths.get(CurrentFile.getAbsolutePath())), (Paths.get(NewLocation.getAbsolutePath())), REPLACE_EXISTING);
+		}
+		catch (IOException e)
+		{
+			// TODO
+		}
     }
     
     void findMP3s() {
