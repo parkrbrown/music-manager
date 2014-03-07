@@ -1,8 +1,13 @@
 package ProgramControl;
 
+import java.io.File;
 import java.io.IOException;
 
-import mp3agic.*;
+import mp3agic.ID3v1Tag;
+import mp3agic.InvalidDataException;
+import mp3agic.Mp3File;
+import mp3agic.NotSupportedException;
+import mp3agic.UnsupportedTagException;
 
 public class FileController {	
 	void checkForTag(Mp3File mp3) {
@@ -16,8 +21,8 @@ public class FileController {
 		//TODO
 	}
 	
-    void saveFile(String file) throws UnsupportedTagException, InvalidDataException, IOException, NotSupportedException {
-    	//Saves file to where it was before
+    void saveFile(File CurrentFile, File NewLocation) {
+    	//Removes Old Files & Re-saves/Saves files to proper location
     	//TODO
     }
     
