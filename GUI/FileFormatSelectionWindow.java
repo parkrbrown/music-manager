@@ -28,6 +28,8 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     private JList Sort, Ignore;
     private String SortSelectedItem, IgnoreSelectedItem;
     
+    //TODO Make a done button; require JCheck title to always be selected
+    
     public FileFormatSelectionWindow()
     {
     	this.setLayout(null);
