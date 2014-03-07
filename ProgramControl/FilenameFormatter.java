@@ -10,8 +10,9 @@ public class FilenameFormatter extends FileController {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void format(/*newFormat*/){
-		// TODO regex
+	public void format(){
+		// TODO
+		//Pulls data from the window
 	}
 
 }

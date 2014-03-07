@@ -10,9 +10,8 @@ public class TagEditor extends FileController {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void updateTag(/*tag*/){
-		// removeTag();
-		// writeTag();
+	public void updateTags() {
+		//pulls all data directly from menu
 	}
 
 }
