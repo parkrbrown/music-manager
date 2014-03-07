@@ -1,5 +1,6 @@
 package ProgramControl;
 
+import java.io.File;
 import java.io.IOException;
 
 import mp3agic.*;
@@ -9,12 +10,27 @@ public class FilenameFormatter extends FileController {
 	//USING TITLE WILL ALWAYS BE A REQUIREMENT
 
 	public FilenameFormatter() {
-		// TODO Auto-generated constructor stub
+
 	}
 	
 	public void format(){
 		// TODO
 		//Pulls data from the window
+		//MainController.FFSW.get.....
+		// take tags in order
+		// rename file with tags from window with dashes in between
+		// File (or directory) with old name
+		File file = new File("oldname");
+
+		// File (or directory) with new name
+		//File file2 = new File();
+
+		// Rename file (or directory)
+		//boolean success = file.renameTo(file2);
+		//if (!success) {
+		// File was not successfully renamed
+		}
+		
 	}
 
 }
