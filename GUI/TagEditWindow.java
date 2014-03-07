@@ -61,6 +61,9 @@ public class TagEditWindow extends JFrame implements ActionListener
     	this.Album.addActionListener(this);
     	this.Genre.addActionListener(this);
     	
+    	this.Confirm.addActionListener(this);
+    	this.Cancel.addActionListener(this);
+    	
     	
     	
     	//Sets the location for each element
