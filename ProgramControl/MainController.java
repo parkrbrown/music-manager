@@ -8,7 +8,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import GUI.FileFormatSelectionWindow;
 import GUI.MainMenu;
-import GUI.OganizationStyleSelectionWindow;
+import GUI.OrganizationStyleSelectionWindow;
 import GUI.TagEditWindow;
 
 
@@ -21,7 +21,7 @@ public class MainController {
     
     //GUI Windows for Program
   	public static MainMenu MainMenu = new MainMenu();
-  	public static OganizationStyleSelectionWindow OSSW = new OganizationStyleSelectionWindow();
+  	public static OrganizationStyleSelectionWindow OSSW = new OrganizationStyleSelectionWindow();
   	public static FileFormatSelectionWindow FFSW = new FileFormatSelectionWindow();
   	public static TagEditWindow TEW = new TagEditWindow();
   	public static JFrame ReferenceFrame = new JFrame();

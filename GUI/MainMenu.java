@@ -2,8 +2,10 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -96,7 +98,39 @@ public class MainMenu extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		if(e.getSource() == Quit)
+		if(e.getSource() == Browse)
+		{
+			int SaveResponse = MainController.FileChooser.showSaveDialog(MainController.ReferenceFrame);
+			if(SaveResponse == JFileChooser.APPROVE_OPTION)
+			{
+				MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
+			}
+			
+			this.CurDir.setText(MainController.CurrentDirectory.toString());
+		}
+		
+		else if(e.getSource() == Format)
+		{
+			MainController.MainMenu.setEnabled(false);
+			MainController.FFSW = new FileFormatSelectionWindow();
+			MainController.FFSW.setVisible(true);
+		}
+		
+		else if(e.getSource() == EditTags)
+		{
+			MainController.MainMenu.setEnabled(false);
+			MainController.TEW = new TagEditWindow();
+			MainController.TEW.setVisible(true);
+		}
+		
+		else if(e.getSource() == Organize)
+		{
+			MainController.MainMenu.setEnabled(false);
+			MainController.OSSW = new OrganizationStyleSelectionWindow();
+			MainController.OSSW.setVisible(true);
+		}
+		
+		else if(e.getSource() == Quit)
 		{
 			System.exit(0);
 		}

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -149,8 +150,42 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		// TODO Auto-generated method stub
+		if(e.getSource() == Browse)
+		{
+			int SaveResponse = MainController.FileChooser.showSaveDialog(MainController.ReferenceFrame);
+			if(SaveResponse == JFileChooser.APPROVE_OPTION)
+			{
+				MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
+			}
+			
+			this.CurDir.setText(MainController.CurrentDirectory.toString());
+		}
 		
+		else if(e.getSource() == Add)
+		{
+			//TODO
+		}
+		
+		else if(e.getSource() == Remove)
+		{
+			//TODO
+		}
+		
+		else if(e.getSource() == Up)
+		{
+			//TODO
+		}
+		
+		else if(e.getSource() == Down)
+		{
+			//TODO
+		}
+		
+		else if(e.getSource() == Return)
+		{
+			MainController.FFSW.setVisible(false);
+			MainController.MainMenu.setEnabled(true);
+		}
 	}
 	
 	

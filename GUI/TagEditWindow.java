@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -21,8 +22,8 @@ public class TagEditWindow extends JFrame implements ActionListener
     private JTextArea CurrentDirectory;
     private JLabel CurDir;
     private JButton Browse, Cancel, Confirm;
-    private JCheckBox Artist, Album, Genre, Year, Etc;
-    private JTextArea TArtist, TAlbum, TGenre, TYear, TEtc;
+    private JCheckBox Artist, Album, Genre;
+    private JTextArea TArtist, TAlbum, TGenre;
     
     public TagEditWindow()
     {
@@ -43,14 +44,10 @@ public class TagEditWindow extends JFrame implements ActionListener
     	this.Artist = new JCheckBox("Artist");
     	this.Album = new JCheckBox("Album");
     	this.Genre = new JCheckBox("Genre");
-    	this.Year = new JCheckBox("Year");
-    	this.Etc = new JCheckBox("Etc.");
     	
     	this.TArtist = new JTextArea();
     	this.TAlbum = new JTextArea();
     	this.TGenre = new JTextArea();
-    	this.TYear = new JTextArea();
-    	this.TEtc = new JTextArea();
     	
     	this.Cancel = new JButton("Cancel");
     	this.Confirm = new JButton("Confirm");
@@ -63,7 +60,6 @@ public class TagEditWindow extends JFrame implements ActionListener
     	this.Artist.addActionListener(this);
     	this.Album.addActionListener(this);
     	this.Genre.addActionListener(this);
-    	this.Year.addActionListener(this);
     	
     	
     	
@@ -75,14 +71,10 @@ public class TagEditWindow extends JFrame implements ActionListener
     	this.Artist.setBounds(15, 75, 65, 35);
     	this.Album.setBounds(15, 125, 65, 35);
     	this.Genre.setBounds(15, 175, 65, 35);
-    	this.Year.setBounds(15, 225, 65, 35);
-    	this.Etc.setBounds(15, 275, 65, 35);
     	
     	this.TArtist.setBounds(85, 82, 150, 20);
     	this.TAlbum.setBounds(85, 132, 150, 20);
     	this.TGenre.setBounds(85, 182, 150, 20);
-    	this.TYear.setBounds(85, 232, 150, 20);
-    	this.TEtc.setBounds(85, 282, 150, 20);
     	
     	this.Cancel.setBounds(280, 222, 85, 35);
     	this.Confirm.setBounds(370, 222, 85, 35);
@@ -106,14 +98,10 @@ public class TagEditWindow extends JFrame implements ActionListener
     	this.add(Artist);
     	this.add(Album);
     	this.add(Genre);
-    	this.add(Year);
-    	this.add(Etc);
     	
     	this.add(TArtist);
     	this.add(TAlbum);
     	this.add(TGenre);
-    	this.add(TYear);
-    	this.add(TEtc);
     	
     	this.add(Cancel);
     	this.add(Confirm);
@@ -129,8 +117,42 @@ public class TagEditWindow extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		// TODO Auto-generated method stub
+		if(e.getSource() == Browse)
+		{
+			int SaveResponse = MainController.FileChooser.showSaveDialog(MainController.ReferenceFrame);
+			if(SaveResponse == JFileChooser.APPROVE_OPTION)
+			{
+				MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
+			}
+			
+			this.CurDir.setText(MainController.CurrentDirectory.toString());
+		}
 		
+		else if(e.getSource() == Cancel)
+		{
+			MainController.TEW.setVisible(false);
+			MainController.MainMenu.setEnabled(true);
+		}
+		
+		else if(e.getSource() == Confirm)
+		{
+			
+		}
+		
+		else if(e.getSource() == Artist)
+		{
+			//TODO
+		}
+		
+		else if(e.getSource() == Album)
+		{
+			//TODO
+		}
+		
+		else if(e.getSource() == Genre)
+		{
+			//TODO
+		}
 	}
 	
 	
@@ -147,14 +169,6 @@ public class TagEditWindow extends JFrame implements ActionListener
 		return Genre;
 	}
 
-	public JCheckBox getYear() {
-		return Year;
-	}
-
-	public JCheckBox getEtc() {
-		return Etc;
-	}
-
 	public JTextArea getTArtist() {
 		return TArtist;
 	}
@@ -165,14 +179,6 @@ public class TagEditWindow extends JFrame implements ActionListener
 
 	public JTextArea getTGenre() {
 		return TGenre;
-	}
-
-	public JTextArea getTYear() {
-		return TYear;
-	}
-
-	public JTextArea getTEtc() {
-		return TEtc;
 	}
 
 	public void setArtist(JCheckBox artist) {
@@ -187,14 +193,6 @@ public class TagEditWindow extends JFrame implements ActionListener
 		Genre = genre;
 	}
 
-	public void setYear(JCheckBox year) {
-		Year = year;
-	}
-
-	public void setEtc(JCheckBox etc) {
-		Etc = etc;
-	}
-
 	public void setTArtist(JTextArea tArtist) {
 		TArtist = tArtist;
 	}
@@ -205,13 +203,5 @@ public class TagEditWindow extends JFrame implements ActionListener
 
 	public void setTGenre(JTextArea tGenre) {
 		TGenre = tGenre;
-	}
-
-	public void setTYear(JTextArea tYear) {
-		TYear = tYear;
-	}
-
-	public void setTEtc(JTextArea tEtc) {
-		TEtc = tEtc;
 	}
 }

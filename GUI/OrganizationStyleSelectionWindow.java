@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -17,7 +18,7 @@ import javax.swing.event.ListSelectionListener;
 import ProgramControl.MainController;
 
 @SuppressWarnings({"serial", "rawtypes", "unchecked"})
-public class OganizationStyleSelectionWindow extends JFrame implements ActionListener
+public class OrganizationStyleSelectionWindow extends JFrame implements ActionListener
 {
 	private JMenuBar MenuBar;
 	private JMenu File, Edit, View, Help;
@@ -27,7 +28,7 @@ public class OganizationStyleSelectionWindow extends JFrame implements ActionLis
     private JList Order, Exclude;
     private String OrderSelectedItem, ExcludeSelectedItem;
     
-    public OganizationStyleSelectionWindow()
+    public OrganizationStyleSelectionWindow()
     {
     	this.setLayout(null);
     	
@@ -149,8 +150,42 @@ public class OganizationStyleSelectionWindow extends JFrame implements ActionLis
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		// TODO Auto-generated method stub
+		if(e.getSource() == Browse)
+		{
+			int SaveResponse = MainController.FileChooser.showSaveDialog(MainController.ReferenceFrame);
+			if(SaveResponse == JFileChooser.APPROVE_OPTION)
+			{
+				MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
+			}
+			
+			this.CurDir.setText(MainController.CurrentDirectory.toString());
+		}
 		
+		else if(e.getSource() == Add)
+		{
+			//TODO
+		}
+		
+		else if(e.getSource() == Remove)
+		{
+			//TODO
+		}
+		
+		else if(e.getSource() == Up)
+		{
+			//TODO
+		}
+		
+		else if(e.getSource() == Down)
+		{
+			//TODO
+		}
+		
+		else if(e.getSource() == Return)
+		{
+			MainController.OSSW.setVisible(false);
+			MainController.MainMenu.setEnabled(true);
+		}
 	}
 	
 	
