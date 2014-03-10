@@ -6,6 +6,10 @@ import java.util.ArrayList;
 
 import mp3agic.*;
 
+/*
+ * This class combines with TagEditWindow.java. It pulls data from the user
+ * clicks confirm and updates the selected tags with their choices.
+ */
 public class TagEditor extends FileController {
 	private ArrayList<Mp3File> fileList;
 	String newArtist;
@@ -21,27 +25,28 @@ public class TagEditor extends FileController {
 		
 		fileList = findMP3s();
 		
-		if (MainController.TEW.newArtist() == true) {
-			newArtist = MainController.TEW.getNewArtist();
+		if (MainController.TEW.isArtistSelected() == true) {
+			newArtist = MainController.TEW.getTArtist();
 		}
 		else {
 			newArtist = null;
 		}
 		
-		if (MainController.TEW.newAlbum() == true) {
-			newAlbum = MainController.TEW.getNewAlbum();
+		if (MainController.TEW.isAlbumSelected() == true) {
+			newAlbum = MainController.TEW.getTAlbum();
 		}
 		else {
 			newAlbum = null;
 		}
 		
-		if (MainController.TEW.newGenre() == true) {
-			newGenre = MainController.TEW.getNewGenre();
+		if (MainController.TEW.isGenreSelected() == true) {
+			newGenre = MainController.TEW.getTGenre();
 		}
 		else {
 			newGenre = null;
 		}
 		
+		//ACTIONS
 		
 		for (int index = 0; index < fileList.size(); index++) {
 			//Checks for tag and creates one if necessary

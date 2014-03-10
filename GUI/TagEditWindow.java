@@ -160,6 +160,43 @@ public class TagEditWindow extends JFrame implements ActionListener
 	
 	
 
+	public boolean isArtistSelected()
+	{
+		if(Artist.isSelected())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public boolean isAlbumSelected()
+	{
+		if(Album.isSelected())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	public boolean isGenreSelected()
+	{
+		if(Genre.isSelected())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	
 	public JCheckBox getArtist() {
 		return Artist;
 	}
@@ -172,16 +209,16 @@ public class TagEditWindow extends JFrame implements ActionListener
 		return Genre;
 	}
 
-	public JTextArea getTArtist() {
-		return TArtist;
+	public String getTArtist() {
+		return TArtist.getText();
 	}
 
-	public JTextArea getTAlbum() {
-		return TAlbum;
+	public String getTAlbum() {
+		return TAlbum.getText();
 	}
 
-	public JTextArea getTGenre() {
-		return TGenre;
+	public String getTGenre() {
+		return TGenre.getText();
 	}
 
 	public void setArtist(JCheckBox artist) {
