@@ -2,9 +2,11 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,9 +14,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JTextArea;
 
+import mp3agic.ID3v1Tag;
 import ProgramControl.MainController;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "rawtypes", "unchecked"})
 public class TagEditWindow extends JFrame implements ActionListener
 {
 	private JMenuBar MenuBar;
@@ -23,7 +26,9 @@ public class TagEditWindow extends JFrame implements ActionListener
     private JLabel CurDir;
     private JButton Browse, Cancel, Confirm;
     private JCheckBox Artist, Album, Genre;
-    private JTextArea TArtist, TAlbum, TGenre;
+    private JTextArea TArtist, TAlbum /*TGenre*/;
+    private JComboBox GenreSelection;
+    private int SelectedGenre;
     
     public TagEditWindow()
     {
@@ -49,8 +54,8 @@ public class TagEditWindow extends JFrame implements ActionListener
     	TArtist.setEditable(false);
     	this.TAlbum = new JTextArea();
     	TAlbum.setEditable(false);
-    	this.TGenre = new JTextArea();
-    	TGenre.setEditable(false);
+    	this.GenreSelection = new JComboBox(mp3agic.ID3v1Genres.GENRES);
+    	GenreSelection.setEditable(false);
     	
     	this.Cancel = new JButton("Cancel");
     	this.Confirm = new JButton("Confirm");
@@ -80,7 +85,7 @@ public class TagEditWindow extends JFrame implements ActionListener
     	
     	this.TArtist.setBounds(85, 82, 150, 20);
     	this.TAlbum.setBounds(85, 132, 150, 20);
-    	this.TGenre.setBounds(85, 182, 150, 20);
+    	this.GenreSelection.setBounds(85, 182, 150, 20);
     	
     	this.Cancel.setBounds(280, 222, 85, 35);
     	this.Confirm.setBounds(370, 222, 85, 35);
@@ -107,7 +112,7 @@ public class TagEditWindow extends JFrame implements ActionListener
     	
     	this.add(TArtist);
     	this.add(TAlbum);
-    	this.add(TGenre);
+    	this.add(GenreSelection);
     	
     	this.add(Cancel);
     	this.add(Confirm);
@@ -119,6 +124,16 @@ public class TagEditWindow extends JFrame implements ActionListener
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 }
+    
+    
+    public void itemStateChanged(ItemEvent e)
+	{
+        if (e.getStateChange() == ItemEvent.SELECTED)
+        {
+        	JComboBox GenreSelection = (JComboBox) e.getSource();
+            SelectedGenre = GenreSelection.getSelectedIndex();
+        }
+    }
 
 	@Override
 	public void actionPerformed(ActionEvent e)
@@ -167,11 +182,11 @@ public class TagEditWindow extends JFrame implements ActionListener
 		
 		else if(e.getSource() == Genre)
 		{
-			if (TGenre.isEditable()) {
-				TGenre.setEditable(false);
+			if (GenreSelection.isEditable()) {
+				GenreSelection.setEditable(false);
 			}
 			else {
-				TGenre.setEditable(true);
+				GenreSelection.setEditable(true);
 			}
 		}
 	}
@@ -235,31 +250,9 @@ public class TagEditWindow extends JFrame implements ActionListener
 		return TAlbum.getText();
 	}
 
-	public String getTGenre() {
-		return TGenre.getText();
-	}
-
-	public void setArtist(JCheckBox artist) {
-		Artist = artist;
-	}
-
-	public void setAlbum(JCheckBox album) {
-		Album = album;
-	}
-
-	public void setGenre(JCheckBox genre) {
-		Genre = genre;
-	}
-
-	public void setTArtist(JTextArea tArtist) {
-		TArtist = tArtist;
-	}
-
-	public void setTAlbum(JTextArea tAlbum) {
-		TAlbum = tAlbum;
-	}
-
-	public void setTGenre(JTextArea tGenre) {
-		TGenre = tGenre;
+	public String getSelectedGenre() {
+		ID3v1Tag Temp = new ID3v1Tag();
+		Temp.setGenre(SelectedGenre);
+		return Temp.getGenreDescription();
 	}
 }
