@@ -20,7 +20,7 @@ public class FilenameFormatter extends FileController {
 		//MainController.FFSW.get.....
 		String oldFilename = /*CurrentFile.getName();*/
 		// take tags in order
-		// rename file with tags from window with dashes in between
+		// rename file with tags from window with dashes in between 
 		// File (or directory) with old name
 		File file = new File(oldFilename);
 		

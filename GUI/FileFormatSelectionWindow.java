@@ -29,6 +29,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     private String SortSelectedItem, IgnoreSelectedItem;
     
     //TODO Make a done button; require JCheck title to always be selected
+    //TODO Make an example string of how the file format will look once the user has selected their preferences. i.e. "Sample Output: 'album-artist-song title.mp3'"
     
     public FileFormatSelectionWindow()
     {
@@ -55,7 +56,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     	
     	
     	//TODO Add options
-    	String[] Options = {/*TODO Tester*/"Hi", "Bye", "Guten Tag", "Bis Dann", "Wie Heist Du?", "So la-la", "Auf Wiedershen!"};
+    	String[] Options = {/*TODO Tester*/"Album", "Artist", "Genre", "Year", "Song Title"};
     	this.Sort = new JList();
     	this.Ignore = new JList(Options);
     	
@@ -154,8 +155,8 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
 	{
 		if(e.getSource() == Browse)
 		{
-			int SaveResponse = MainController.FileChooser.showSaveDialog(MainController.ReferenceFrame);
-			if(SaveResponse == JFileChooser.APPROVE_OPTION)
+			int Location = MainController.FileChooser.showOpenDialog(MainController.ReferenceFrame);
+			if(Location == JFileChooser.APPROVE_OPTION)
 			{
 				MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
 			}
@@ -166,6 +167,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
 		else if(e.getSource() == Add)
 		{
 			//TODO
+			
 		}
 		
 		else if(e.getSource() == Remove)
