@@ -47,7 +47,7 @@ public class FilenameFormatter extends FileController {
 		//for each song
 			//rename to match getFormatOrder();
 		for(int i = 0; i < mp3s.size(); i++){
-			Mp3File mp3;
+			Mp3File mp3 = null;
 			try {
 				mp3 = new Mp3File(mp3s.get(i).getAbsolutePath());
 			} catch (UnsupportedTagException e) {
