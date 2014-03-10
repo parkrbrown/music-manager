@@ -26,7 +26,7 @@ public class TagEditWindow extends JFrame implements ActionListener
     private JLabel CurDir;
     private JButton Browse, Cancel, Confirm;
     private JCheckBox Artist, Album, Genre;
-    private JTextArea TArtist, TAlbum /*TGenre*/;
+    private JTextArea TArtist, TAlbum;  //TGenre replaced by GenreSelection
     private JComboBox GenreSelection;
     private int SelectedGenre;
     
@@ -140,8 +140,8 @@ public class TagEditWindow extends JFrame implements ActionListener
 	{
 		if(e.getSource() == Browse)
 		{
-			int SaveResponse = MainController.FileChooser.showSaveDialog(MainController.ReferenceFrame);
-			if(SaveResponse == JFileChooser.APPROVE_OPTION)
+			int Location = MainController.FileChooser.showOpenDialog(MainController.ReferenceFrame);
+			if(Location == JFileChooser.APPROVE_OPTION)
 			{
 				MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
 			}
@@ -157,6 +157,15 @@ public class TagEditWindow extends JFrame implements ActionListener
 		
 		else if(e.getSource() == Confirm)
 		{
+			if (Artist.isSelected() && Artist.getText() == null) {
+				
+			}
+			else if (Album.isSelected() && Album.getText() == null) {
+				
+			}
+			else {
+				
+			}
 			
 		}
 		
@@ -250,9 +259,7 @@ public class TagEditWindow extends JFrame implements ActionListener
 		return TAlbum.getText();
 	}
 
-	public String getSelectedGenre() {
-		ID3v1Tag Temp = new ID3v1Tag();
-		Temp.setGenre(SelectedGenre);
-		return Temp.getGenreDescription();
+	public int getSelectedGenre() {
+		return SelectedGenre;
 	}
 }

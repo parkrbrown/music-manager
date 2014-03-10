@@ -12,9 +12,9 @@ import mp3agic.*;
  */
 public class TagEditor extends FileController {
 	private ArrayList<Mp3File> fileList;
-	String newArtist;
-	String newAlbum;
-	String newGenre;
+	private String newArtist;
+	private String newAlbum;
+	private int newGenre; //Uses -1 as an equivalent for null
 
 	public TagEditor() {
 		// TODO Auto-generated constructor stub
@@ -40,10 +40,10 @@ public class TagEditor extends FileController {
 		}
 		
 		if (MainController.TEW.isGenreSelected() == true) {
-			newGenre = MainController.TEW.getTGenre();
+			newGenre = MainController.TEW.getSelectedGenre();
 		}
 		else {
-			newGenre = null;
+			newGenre = -1;
 		}
 		
 		//ACTIONS
@@ -62,7 +62,7 @@ public class TagEditor extends FileController {
 				thisTag.setAlbum(newAlbum);
 			}
 			
-			if (newGenre != null) {
+			if (newGenre != -1) {
 				thisTag.setGenre(newGenre);
 			}
 			
