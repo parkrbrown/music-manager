@@ -3,9 +3,11 @@ package ProgramControl;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import mp3agic.ID3v1Tag;
 import mp3agic.InvalidDataException;
@@ -14,18 +16,23 @@ import mp3agic.NotSupportedException;
 import mp3agic.UnsupportedTagException;
 
 public class FileController {	
-	void checkForTag(Mp3File mp3) {
-		//Checks for a v1 tag and creates a new one if none is found
-		// TODO
+	public Mp3File checkForTag(Mp3File mp3) {
+		if(mp3.hasId3v1Tag())
+		{
+			return mp3;
+		}
+		else
+		{
+			mp3.setId3v1Tag(new ID3v1Tag());
+			return mp3;
+		}
 	}
 	
-	ID3v1Tag getTag(Mp3File mp3) {
-		//returns actual ID3v1 tag
-		return null;
-		//TODO
+	public ID3v1Tag getTag(Mp3File mp3) {
+		return (ID3v1Tag) mp3.getId3v1Tag();
 	}
 	
-    void saveFile(File CurrentFile, File NewLocation, Mp3File FileToSave)
+    public void saveFile(File CurrentFile, File NewLocation, Mp3File FileToSave)
     {
     	try
 		{
@@ -52,8 +59,37 @@ public class FileController {
 		}
     }
     
-    void findMP3s() {
-    	//Derek has this; pulls the list of mp3 files in the directory
-    	//TODO
+    public ArrayList<File> findMP3s(String directoryName) {
+		//Filter files by .mp3 extension
+		FilenameFilter mp3Filter = new FilenameFilter() {
+			public boolean accept(File dir, String name) {
+				return (name.endsWith(".mp3"));
+    		}
+		};
+
+		File directory = new File(directoryName);
+		//Add all files in directory to an array
+		File[] fileList = directory.listFiles(); 
+		ArrayList<File> mp3Files = new ArrayList<File>();
+
+    	if(fileList == null){
+    		//TODO Give alert		System.out.println("Directory not found: " + directory);
+    	}else if(fileList.length == 0){
+    		//TODO Give alert		System.out.println("Empty directory: " + directory);
+    	}else{
+
+			//Go through all files in the fileList and add .mp3 files to the ArrayList
+			for (File file : fileList){
+				if (file.isFile()){
+					if(mp3Filter.accept(directory,file.getName())){
+						mp3Files.add(file);
+					}
+				//If a sub-directory is found, search for mp3s in that directory
+				} else if (file.isDirectory()){
+					findMP3s(file.getAbsolutePath());
+				}
+			}
+    	}
+    	return mp3Files;
     }
 }
