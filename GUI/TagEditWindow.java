@@ -158,13 +158,14 @@ public class TagEditWindow extends JFrame implements ActionListener
 		else if(e.getSource() == Confirm)
 		{
 			if (Artist.isSelected() && Artist.getText() == null) {
-				
+				//TODO Prompt user to fill in or de-select fields
 			}
 			else if (Album.isSelected() && Album.getText() == null) {
-				
+				//TODO Prompt user to fill in or de-select fields
 			}
 			else {
-				
+				MainController.TE.updateTags();
+				//TODO Set main menu visible and hide this menu??
 			}
 			
 		}

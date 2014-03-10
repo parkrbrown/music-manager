@@ -17,7 +17,7 @@ public class TagEditor extends FileController {
 	private int newGenre; //Uses -1 as an equivalent for null
 
 	public TagEditor() {
-		// TODO Auto-generated constructor stub
+		// Auto-generated constructor stub
 	}
 	
 	public void updateTags() {
