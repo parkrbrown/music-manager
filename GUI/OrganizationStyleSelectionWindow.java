@@ -154,6 +154,7 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
 		{
 			int Location = MainController.FileChooser.showOpenDialog(MainController.ReferenceFrame);
 			if(Location == JFileChooser.APPROVE_OPTION)
+			{
 				MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
 			}
 			
