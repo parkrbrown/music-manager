@@ -149,6 +149,20 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setLocationRelativeTo(null);
     }
+    
+    
+	public ArrayList<String> getFormatOrder()
+	{
+		ArrayList<String> ItemsInOrder = new ArrayList<String>();
+		int i = 0;
+		while(((String.valueOf(Sort.getComponent(i)) != null) || ((String.valueOf(Sort.getComponent(i)) != ""))))
+		{
+			ItemsInOrder.add(String.valueOf(Sort.getComponent(i)));
+			i++;
+		}
+		return ItemsInOrder;
+	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e)
@@ -190,18 +204,5 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
 			MainController.FFSW.setVisible(false);
 			MainController.MainMenu.setEnabled(true);
 		}
-	}
-	
-	
-	public ArrayList<String> getFormatOrder()
-	{
-		ArrayList<String> ItemsInOrder = new ArrayList<String>();
-		int i = 0;
-		while(((String.valueOf(Sort.getComponent(i)) != null) || ((String.valueOf(Sort.getComponent(i)) != ""))))
-		{
-			ItemsInOrder.add(String.valueOf(Sort.getComponent(i)));
-			i++;
-		}
-		return ItemsInOrder;
 	}
 }
