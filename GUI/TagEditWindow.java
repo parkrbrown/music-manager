@@ -46,8 +46,11 @@ public class TagEditWindow extends JFrame implements ActionListener
     	this.Genre = new JCheckBox("Genre");
     	
     	this.TArtist = new JTextArea();
+    	TArtist.setEditable(false);
     	this.TAlbum = new JTextArea();
+    	TAlbum.setEditable(false);
     	this.TGenre = new JTextArea();
+    	TGenre.setEditable(false);
     	
     	this.Cancel = new JButton("Cancel");
     	this.Confirm = new JButton("Confirm");
@@ -144,17 +147,32 @@ public class TagEditWindow extends JFrame implements ActionListener
 		
 		else if(e.getSource() == Artist)
 		{
-			//TODO
+			if (TArtist.isEditable()) {
+				TArtist.setEditable(false);
+			}
+			else {
+				TArtist.setEditable(true);
+			}
 		}
 		
 		else if(e.getSource() == Album)
 		{
-			//TODO
+			if (TAlbum.isEditable()) {
+				TAlbum.setEditable(false);
+			}
+			else {
+				TAlbum.setEditable(true);
+			}
 		}
 		
 		else if(e.getSource() == Genre)
 		{
-			//TODO
+			if (TGenre.isEditable()) {
+				TGenre.setEditable(false);
+			}
+			else {
+				TGenre.setEditable(true);
+			}
 		}
 	}
 	
