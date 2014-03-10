@@ -98,8 +98,8 @@ public class MainMenu extends JFrame implements ActionListener
 	{
 		if(e.getSource() == Browse)
 		{
-			int SaveResponse = MainController.FileChooser.showSaveDialog(MainController.ReferenceFrame);
-			if(SaveResponse == JFileChooser.APPROVE_OPTION)
+			int Location = MainController.FileChooser.showOpenDialog(MainController.ReferenceFrame);
+			if(Location == JFileChooser.APPROVE_OPTION)
 			{
 				MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
 			}
