@@ -5,10 +5,13 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import mp3agic.Mp3File;
+
 
 public class FileOrganizer extends FileController {
 	private ArrayList<File> fileList;
 	private ArrayList<File> nonMp3Files;
+	private static String rootDirectory = MainController.CurrentDirectory.getAbsolutePath();
 	
 	public FileOrganizer() {
 		// No tasks for constructor
@@ -95,6 +98,20 @@ public class FileOrganizer extends FileController {
 	
 	public void moveFilesToRoot(){
 		//TODO
+		fileList = findMP3s();
+		for(int i = 0; i < fileList.size(); i++){
+			try{
+				File fileToMove = new File(fileList.get(i).getAbsolutePath());
+				
+				if(fileToMove.renameTo(new File(rootDirectory + fileToMove.getName()))){
+					System.out.println(fileToMove.getAbsolutePath() + " successfully moved.");
+				}else{
+					System.out.println(fileToMove.getAbsolutePath() + " move unsuccessful.");
+				}
+			}catch(Exception e){
+				e.getMessage();
+			}
+		}
 	}
 	
 	public void deleteEmptyFolders(){
