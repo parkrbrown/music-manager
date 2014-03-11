@@ -24,7 +24,7 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
 	private JMenu File, Edit, View, Help;
     private JTextArea CurrentDirectory;
     private JLabel CurDir;
-    private JButton Browse, Add, Remove, Up, Down, Return;
+    private JButton Browse, Add, Remove, Up, Down, Return, Go;
     private JList Order, Exclude;
     private ArrayList<String> OrderItems, ExcludeItems;
     
@@ -51,6 +51,7 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
     	this.Down = new JButton("Move Down");
     	
     	this.Return = new JButton("<html><center>Return To Main Menu</center></html>");
+    	this.Go = new JButton("<html><center>Organize MP3</center></htm>");
     	
     	
 
@@ -79,6 +80,7 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
     	this.Down.addActionListener(this);
     	
     	this.Return.addActionListener(this);
+    	this.Go.addActionListener(this);
     	
     	
     	
@@ -122,7 +124,8 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
     	this.Up.setBounds(275, 165, 100, 40);
     	this.Down.setBounds(275, 215, 100, 40);
     	
-    	this.Return.setBounds(275, 295, 100, 65);
+    	this.Return.setBounds(435, 295, 100, 65);
+    	this.Go.setBounds(550, 295, 200, 65);
     	
     	
     	
@@ -149,6 +152,7 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
     	this.add(Down);
     	
     	this.add(Return);
+    	this.add(Go);
     	
     	
     	
@@ -260,6 +264,13 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
 		
 		else if(e.getSource() == Return)
 		{
+			MainController.MainMenu.setEnabled(true);
+			MainController.OSSW.setVisible(false);
+		}
+		
+		else if(e.getSource() == Go)
+		{
+			MainController.FO.organize();
 			MainController.MainMenu.setEnabled(true);
 			MainController.OSSW.setVisible(false);
 		}
