@@ -5,7 +5,6 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import mp3agic.*;
 
 public class FileOrganizer extends FileController {
 	private ArrayList<File> fileList;

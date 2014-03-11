@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import mp3agic.*;
+import mp3agic.ID3v1Tag;
+import mp3agic.InvalidDataException;
+import mp3agic.Mp3File;
+import mp3agic.UnsupportedTagException;
+
 
 /*
  * This class combines with TagEditWindow.java. It pulls data from the user
