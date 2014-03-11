@@ -278,7 +278,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
 		
 		else if(e.getSource() == Go)
 		{
-			MainController.FNF.organize();
+			MainController.FNF.format();;
 			MainController.MainMenu.setEnabled(true);
 			MainController.FFSW.setVisible(false);
 		}
