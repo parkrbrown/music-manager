@@ -162,7 +162,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     }
     
     
-	public ArrayList<String> getFormatSort()
+	public ArrayList<String> getFormatOrder()
 	{
 		ArrayList<String> ItemsInSort = new ArrayList<String>();
 		int i = 0;

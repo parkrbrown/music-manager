@@ -15,7 +15,9 @@ import mp3agic.Mp3File;
 import mp3agic.NotSupportedException;
 import mp3agic.UnsupportedTagException;
 
-public class FileController {	
+public class FileController {
+	
+	
 	public Mp3File checkForTag(Mp3File mp3) {
 		if(mp3.hasId3v1Tag())
 		{
