@@ -59,7 +59,7 @@ public class FileController {
 		}
     }
     
-    public ArrayList<File> findMP3s(String directoryName) {
+    public ArrayList<File> findMP3s() {
 		//Filter files by .mp3 extension
 		FilenameFilter mp3Filter = new FilenameFilter() {
 			public boolean accept(File dir, String name) {
@@ -67,7 +67,7 @@ public class FileController {
     		}
 		};
 
-		File directory = new File(directoryName);
+		File directory = new File(MainController.CurrentDirectory.toString());
 		//Add all files in directory to an array
 		File[] fileList = directory.listFiles(); 
 		ArrayList<File> mp3Files = new ArrayList<File>();
@@ -86,7 +86,7 @@ public class FileController {
 					}
 				//If a sub-directory is found, search for mp3s in that directory
 				} else if (file.isDirectory()){
-					findMP3s(file.getAbsolutePath());
+					findMP3s();
 				}
 			}
     	}
