@@ -13,7 +13,7 @@ public class FilenameFormatter extends FileController {
 	
 	public void format(){
 		String currentDirectory = MainController.CurrentDirectory.getAbsolutePath();
-		ArrayList<File> mp3s = findMP3s(currentDirectory);
+		ArrayList<File> mp3s = findMP3s();
 		ArrayList<String> renameTo = MainController.FFSW.getFormatOrder();
 		
 		for(int i = 0; i < mp3s.size(); i++){
