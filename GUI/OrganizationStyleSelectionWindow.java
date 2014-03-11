@@ -53,7 +53,7 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
     	
     	
     	//TODO Add options
-    	String[] Options = {/*TODO Tester*/"Hi", "Bye", "Guten Tag", "Bis Dann", "Wie Heist Du?", "So la-la", "Auf Wiedershen!"};
+    	String[] Options = {/*TODO Tester*/"Album", "Artist", "Genre", "Year"};
     	this.Order = new JList();
     	this.Exclude = new JList(Options);
     	
