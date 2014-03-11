@@ -3,7 +3,7 @@ package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
+import java.util.Collections;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -26,7 +26,7 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
     private JLabel CurDir;
     private JButton Browse, Add, Remove, Up, Down, Return;
     private JList Order, Exclude;
-    private String OrderSelectedItem, ExcludeSelectedItem;
+    private ArrayList<String> OrderItems, ExcludeItems;
     
     public OrganizationStyleSelectionWindow()
     {
@@ -52,11 +52,21 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
     	this.Return = new JButton("<html><center>Return To Main Menu</center></html>");
     	
     	
-    	//TODO Add options
-    	//TODO Create a sample output for the path directory structure the user can expect to see. ie Music/Artist/Album
+
     	String[] Options = {/*TODO Tester*/"Album", "Artist", "Genre", "Year"};
     	this.Order = new JList();
     	this.Exclude = new JList(Options);
+
+    	this.ExcludeItems = new ArrayList<>();
+    	this.OrderItems = new ArrayList<>();
+    	this.ExcludeItems.add("Album");
+    	this.ExcludeItems.add("Artist");
+    	this.ExcludeItems.add("Genre");
+    	this.ExcludeItems.add("Year");
+    	
+    	this.Order = new JList(OrderItems.toArray());
+    	this.Exclude = new JList(ExcludeItems.toArray());
+
     	
     	
     	
@@ -79,7 +89,7 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
     		{
     			if(!e.getValueIsAdjusting())
     			{
-    				OrderSelectedItem = (String)Order.getSelectedValue();
+//    				OrderSelectedItem = Order.getSelectedIndex();
     			}
     		}
     	});
@@ -91,7 +101,7 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
     		{
     			if(!e.getValueIsAdjusting())
     			{
-    				ExcludeSelectedItem = (String)Order.getSelectedValue();
+//    				ExcludeSelectedItem = Exclude.getSelectedIndex();
     			}
     		}
     	});
@@ -147,6 +157,21 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setLocationRelativeTo(null);
     }
+	
+	
+	
+	public ArrayList<String> getOrganizationOrder()
+	{
+		ArrayList<String> ItemsInOrder = new ArrayList<String>();
+		int i = 0;
+		while(((String.valueOf(Order.getComponent(i)) != null) || ((String.valueOf(Order.getComponent(i)) != ""))))
+		{
+			ItemsInOrder.add(String.valueOf(Order.getComponent(i)));
+			i++;
+		}
+		return ItemsInOrder;
+	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e)
@@ -164,42 +189,78 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
 		
 		else if(e.getSource() == Add)
 		{
-			//TODO
+			OrderItems.add((String)Exclude.getSelectedValue());
+			ExcludeItems.remove(Exclude.getSelectedIndex());
+			
+			this.remove(Order);
+			this.remove(Exclude);
+			
+			this.Order = new JList(OrderItems.toArray());
+			this.Exclude = new JList(ExcludeItems.toArray());
+			
+			this.Order.setBounds(15, 65, 250, 225);
+	    	this.Exclude.setBounds(385, 65, 250, 225);			
+			this.add(Order);
+			this.add(Exclude);
+			
+			MainController.OSSW.setVisible(false);
+			MainController.OSSW.setVisible(true);
 		}
 		
 		else if(e.getSource() == Remove)
 		{
-			//TODO
+			ExcludeItems.add((String)Order.getSelectedValue());
+			OrderItems.remove(Order.getSelectedIndex());
+			
+			this.remove(Order);
+			this.remove(Exclude);
+			
+			this.Order = new JList(OrderItems.toArray());
+			this.Exclude = new JList(ExcludeItems.toArray());
+
+			this.Order.setBounds(15, 65, 250, 225);
+	    	this.Exclude.setBounds(385, 65, 250, 225);			
+			this.add(Order);
+			this.add(Exclude);
+			
+			MainController.OSSW.setVisible(false);
+			MainController.OSSW.setVisible(true);
 		}
 		
 		else if(e.getSource() == Up)
 		{
-			//TODO
+			Collections.swap(OrderItems, Order.getSelectedIndex(), (Order.getSelectedIndex() - 1));
+
+			this.remove(Order);
+			
+			this.Order = new JList(OrderItems.toArray());
+
+			this.Order.setBounds(15, 65, 250, 225);
+			this.add(Order);
+			
+			MainController.OSSW.setVisible(false);
+			MainController.OSSW.setVisible(true);
 		}
 		
 		else if(e.getSource() == Down)
 		{
-			//TODO
+			Collections.swap(OrderItems, Order.getSelectedIndex(), (Order.getSelectedIndex() + 1));
+
+			this.remove(Order);
+			
+			this.Order = new JList(OrderItems.toArray());
+
+			this.Order.setBounds(15, 65, 250, 225);
+			this.add(Order);
+			
+			MainController.OSSW.setVisible(false);
+			MainController.OSSW.setVisible(true);
 		}
 		
 		else if(e.getSource() == Return)
 		{
-			MainController.OSSW.setVisible(false);
 			MainController.MainMenu.setEnabled(true);
+			MainController.OSSW.setVisible(false);
 		}
-	}
-	
-	
-	
-	public ArrayList<String> getOrganizationOrder()
-	{
-		ArrayList<String> ItemsInOrder = new ArrayList<String>();
-		int i = 0;
-		while(((String.valueOf(Order.getComponent(i)) != null) || ((String.valueOf(Order.getComponent(i)) != ""))))
-		{
-			ItemsInOrder.add(String.valueOf(Order.getComponent(i)));
-			i++;
-		}
-		return ItemsInOrder;
 	}
 }

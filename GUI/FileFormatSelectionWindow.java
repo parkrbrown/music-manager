@@ -3,6 +3,7 @@ package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -26,7 +28,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     private JLabel CurDir;
     private JButton Browse, Add, Remove, Up, Down, Return;
     private JList Sort, Ignore;
-    private String SortSelectedItem, IgnoreSelectedItem;
+    private ArrayList<String> SortItems, IgnoreItems;
     
     //TODO Make a done button; require JCheck title to always be selected
     //TODO Make an example string of how the file format will look once the user has selected their preferences. i.e. "Sample Output: 'album-artist-song title.mp3'"
@@ -55,10 +57,18 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     	this.Return = new JButton("<html><center>Return To Main Menu</center></html>");
     	
     	
-    	//TODO Add options
-    	String[] Options = {/*TODO Tester*/"Album", "Artist", "Genre", "Year", "Song Title"};
-    	this.Sort = new JList();
-    	this.Ignore = new JList(Options);
+    	this.IgnoreItems = new ArrayList<>();
+    	this.SortItems = new ArrayList<>();
+    	
+    	SortItems.add("Title");
+    	
+    	this.IgnoreItems.add("Album");
+    	this.IgnoreItems.add("Artist");
+    	this.IgnoreItems.add("Genre");
+    	this.IgnoreItems.add("Year");
+    	
+    	this.Sort = new JList(SortItems.toArray());
+    	this.Ignore = new JList(IgnoreItems.toArray());
     	
     	
     	
@@ -81,7 +91,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     		{
     			if(!e.getValueIsAdjusting())
     			{
-    				SortSelectedItem = (String)Sort.getSelectedValue();
+//    				SortSelectedItem = (String)Sort.getSelectedValue();
     			}
     		}
     	});
@@ -93,7 +103,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     		{
     			if(!e.getValueIsAdjusting())
     			{
-    				IgnoreSelectedItem = (String)Ignore.getSelectedValue();
+//    				IgnoreSelectedItem = (String)Ignore.getSelectedValue();
     			}
     		}
     	});
@@ -151,16 +161,16 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     }
     
     
-	public ArrayList<String> getFormatOrder()
+	public ArrayList<String> getFormatSort()
 	{
-		ArrayList<String> ItemsInOrder = new ArrayList<String>();
+		ArrayList<String> ItemsInSort = new ArrayList<String>();
 		int i = 0;
 		while(((String.valueOf(Sort.getComponent(i)) != null) || ((String.valueOf(Sort.getComponent(i)) != ""))))
 		{
-			ItemsInOrder.add(String.valueOf(Sort.getComponent(i)));
+			ItemsInSort.add(String.valueOf(Sort.getComponent(i)));
 			i++;
 		}
-		return ItemsInOrder;
+		return ItemsInSort;
 	}
 	
 
@@ -180,29 +190,85 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
 		
 		else if(e.getSource() == Add)
 		{
-			//TODO
+			SortItems.add((String)Ignore.getSelectedValue());
+			IgnoreItems.remove(Ignore.getSelectedIndex());
 			
+			this.remove(Sort);
+			this.remove(Ignore);
+			
+			this.Sort = new JList(SortItems.toArray());
+			this.Ignore = new JList(IgnoreItems.toArray());
+			
+			this.Sort.setBounds(15, 65, 250, 225);
+	    	this.Ignore.setBounds(385, 65, 250, 225);			
+			this.add(Sort);
+			this.add(Ignore);
+			
+			MainController.FFSW.setVisible(false);
+			MainController.FFSW.setVisible(true);
 		}
 		
 		else if(e.getSource() == Remove)
 		{
-			//TODO
+			if(((String)Sort.getSelectedValue()).equals("Title"))
+			{
+				JOptionPane.showMessageDialog(MainController.ReferenceFrame, "You must include the song title in the file name!", "Invalid Option Choice", JOptionPane.WARNING_MESSAGE);
+			}
+			else
+			{
+				IgnoreItems.add((String)Sort.getSelectedValue());
+				SortItems.remove(Sort.getSelectedIndex());
+				
+				this.remove(Sort);
+				this.remove(Ignore);
+				
+				this.Sort = new JList(SortItems.toArray());
+				this.Ignore = new JList(IgnoreItems.toArray());
+	
+				this.Sort.setBounds(15, 65, 250, 225);
+		    	this.Ignore.setBounds(385, 65, 250, 225);			
+				this.add(Sort);
+				this.add(Ignore);
+				
+				MainController.FFSW.setVisible(false);
+				MainController.FFSW.setVisible(true);
+			}
 		}
 		
 		else if(e.getSource() == Up)
 		{
-			//TODO
+			Collections.swap(SortItems, Sort.getSelectedIndex(), (Sort.getSelectedIndex() - 1));
+
+			this.remove(Sort);
+			
+			this.Sort = new JList(SortItems.toArray());
+
+			this.Sort.setBounds(15, 65, 250, 225);
+			this.add(Sort);
+			
+			MainController.FFSW.setVisible(false);
+			MainController.FFSW.setVisible(true);
 		}
 		
 		else if(e.getSource() == Down)
 		{
-			//TODO
+			Collections.swap(SortItems, Sort.getSelectedIndex(), (Sort.getSelectedIndex() + 1));
+
+			this.remove(Sort);
+			
+			this.Sort = new JList(SortItems.toArray());
+
+			this.Sort.setBounds(15, 65, 250, 225);
+			this.add(Sort);
+			
+			MainController.FFSW.setVisible(false);
+			MainController.FFSW.setVisible(true);
 		}
 		
 		else if(e.getSource() == Return)
 		{
-			MainController.FFSW.setVisible(false);
 			MainController.MainMenu.setEnabled(true);
+			MainController.FFSW.setVisible(false);
 		}
 	}
 }
