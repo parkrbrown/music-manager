@@ -11,6 +11,7 @@ public class FilenameFormatter extends FileController {
 
 	}
 	
+	//Renames the mp3 filename according to user preferences
 	public void format(){
 		String currentDirectory = MainController.CurrentDirectory.getAbsolutePath();
 		ArrayList<File> mp3s = findMP3s();
