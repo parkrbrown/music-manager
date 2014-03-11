@@ -53,6 +53,7 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
     	
     	
     	//TODO Add options
+    	//TODO Create a sample output for the path directory structure the user can expect to see. ie Music/Artist/Album
     	String[] Options = {/*TODO Tester*/"Album", "Artist", "Genre", "Year"};
     	this.Order = new JList();
     	this.Exclude = new JList(Options);
