@@ -26,7 +26,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
 	private JMenu File, Edit, View, Help;
     private JTextArea CurrentDirectory;
     private JLabel CurDir;
-    private JButton Browse, Add, Remove, Up, Down, Return;
+    private JButton Browse, Add, Remove, Up, Down, Return, Go;
     private JList Sort, Ignore;
     private ArrayList<String> SortItems, IgnoreItems;
     
@@ -56,6 +56,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     	this.Down = new JButton("Move Down");
     	
     	this.Return = new JButton("<html><center>Return To Main Menu</center></html>");
+    	this.Go = new JButton("<html><center>Rename MP3s</center></htm>");
     	
     	
     	this.IgnoreItems = new ArrayList<>();
@@ -81,6 +82,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     	this.Down.addActionListener(this);
     	
     	this.Return.addActionListener(this);
+    	this.Go.addActionListener(this);
     	
     	
     	
@@ -124,7 +126,8 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     	this.Up.setBounds(275, 165, 100, 40);
     	this.Down.setBounds(275, 215, 100, 40);
     	
-    	this.Return.setBounds(275, 295, 100, 65);
+    	this.Return.setBounds(435, 295, 100, 65);
+    	this.Go.setBounds(550, 295, 200, 65);
     	
     	
     	
@@ -151,6 +154,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
     	this.add(Down);
     	
     	this.add(Return);
+    	this.add(Go);
     	
     	
     	
@@ -268,6 +272,13 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener
 		
 		else if(e.getSource() == Return)
 		{
+			MainController.MainMenu.setEnabled(true);
+			MainController.FFSW.setVisible(false);
+		}
+		
+		else if(e.getSource() == Go)
+		{
+			MainController.FNF.organize();
 			MainController.MainMenu.setEnabled(true);
 			MainController.FFSW.setVisible(false);
 		}

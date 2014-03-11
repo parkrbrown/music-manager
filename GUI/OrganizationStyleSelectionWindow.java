@@ -51,7 +51,7 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
     	this.Down = new JButton("Move Down");
     	
     	this.Return = new JButton("<html><center>Return To Main Menu</center></html>");
-    	this.Go = new JButton("<html><center>Organize MP3</center></htm>");
+    	this.Go = new JButton("<html><center>Organize MP3s</center></htm>");
     	
     	
 
