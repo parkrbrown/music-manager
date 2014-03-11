@@ -34,6 +34,7 @@ public class MainMenu extends JFrame implements ActionListener
     	this.Help = new JMenu("Help");
     	
     	this.CurrentDirectory = new JTextArea(MainController.CurrentDirectory.toString());
+    		this.CurrentDirectory.setEditable(false);
     	this.Browse = new JButton("Change...");
     	this.CurDir = new JLabel("Current Directory:");
     	
@@ -104,7 +105,7 @@ public class MainMenu extends JFrame implements ActionListener
 				MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
 			}
 			
-			this.CurDir.setText(MainController.CurrentDirectory.toString());
+			this.CurrentDirectory.setText(MainController.CurrentDirectory.toString());
 		}
 		
 		else if(e.getSource() == Format)

@@ -36,6 +36,7 @@ public class MainController {
 	
 	
     public static void main (String[] args) {
+    	FileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     	MainMenu.setVisible(true);
     }
 }
