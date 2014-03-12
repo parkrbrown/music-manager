@@ -111,12 +111,16 @@ public class FileOrganizer extends FileController {
 			}catch(Exception e){
 				e.getMessage();
 			}
-		}
+		} 
 	}
 	
 	public void deleteEmptyFolders(){
 		//TODO
-		
+		//findDirectories()
+		//check to see if dir.isEmpty()
+			//if !empty ignore dir and move to the next
+		//file.delete()
+	
 	}
 	
 	public void createDirectories(){
