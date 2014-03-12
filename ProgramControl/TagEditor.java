@@ -31,7 +31,7 @@ public class TagEditor extends FileController {
      */
     public void updateTags() {
         //VARIABLES
-        fileList = findMP3s(); //Builds list of files that are mp3s
+        fileList = findMP3s(MainController.CurrentDirectory.getAbsoluteFile()); //Builds list of files that are mp3s
         //Converts fileList into a list of Mp3Files
         for (int count = 0; count < fileList.size(); count++) {
             Mp3File temp = null;

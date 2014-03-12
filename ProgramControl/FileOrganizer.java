@@ -9,7 +9,7 @@ import mp3agic.Mp3File;
 
 
 public class FileOrganizer extends FileController {
-	private ArrayList<File> fileList = findMP3s();
+	private ArrayList<File> fileList = findMP3s(MainController.CurrentDirectory.getAbsoluteFile());
 	private ArrayList<File> nonMp3Files;
 	private static String rootDirectory = MainController.CurrentDirectory.getAbsolutePath();
 	
@@ -90,7 +90,7 @@ public class FileOrganizer extends FileController {
 					}
 				//If a sub-directory is found, search for mp3s in that directory
 				} else if (file.isDirectory()){
-					findMP3s();
+					findMP3s(MainController.CurrentDirectory.getAbsoluteFile());
 				}
 			}
     	}
@@ -121,7 +121,7 @@ public class FileOrganizer extends FileController {
 	
 	public void createDirectories(){
 		ArrayList<String> foldersToCreate = MainController.FFSW.getFormatOrder();
-		ArrayList<File> mp3s = findMP3s();
+		ArrayList<File> mp3s = findMP3s(MainController.CurrentDirectory.getAbsoluteFile());
 	}
 	
 	public void moveFromRootToNewDir(){
