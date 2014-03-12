@@ -9,7 +9,7 @@ import mp3agic.Mp3File;
 
 
 public class FileOrganizer extends FileController {
-	private ArrayList<File> fileList;
+	private ArrayList<File> fileList = findMP3s();
 	private ArrayList<File> nonMp3Files;
 	private static String rootDirectory = MainController.CurrentDirectory.getAbsolutePath();
 	
@@ -21,17 +21,17 @@ public class FileOrganizer extends FileController {
 	public void organize() {
 		//Derek working here...
 		//Get cur directory and scan dir for mp3s
-		fileList = findMP3s();
-		checkForNonMP3s(); //if file !mp3 prompt user to move the file into a new folder, 
+		
+		verifyNoMp3sFound(); //if file !mp3 prompt user to move the file into a new folder, 
 			//re-run once files are out of the folder.  give absolute path for the dir that has non-mp3s
 		
 		
 		//move all mp3s from sub directories to current dir
-		moveFilesToRoot();
+//		moveFilesToRoot();
 		//remove empty directories
-		deleteEmptyFolders();
+//		deleteEmptyFolders();
 		
-		//create new directories IAW user preferences
+		//create new directories IAW user preferences  IGNORE CASE
 			//check if folder already exists
 				//if true
 					//don't make dir
@@ -54,10 +54,11 @@ public class FileOrganizer extends FileController {
 //		//or use Files.move()
 //	}
 	
-	private void checkForNonMP3s() /* TODO throws Exception */ {
+	private void verifyNoMp3sFound() /* TODO throws Exception */ {
 		ArrayList<File> nonMp3Files = findNonMP3s();
 		
 		if (nonMp3Files.size() > 0) {
+			System.out.println(nonMp3Files.get(0).getName() + ", make sure all files other than .mp3 are removed from this directory.");
 			//throw new nonMP3FileException
 		}
 	}
@@ -98,7 +99,6 @@ public class FileOrganizer extends FileController {
 	
 	public void moveFilesToRoot(){
 		//TODO
-		fileList = findMP3s();
 		for(int i = 0; i < fileList.size(); i++){
 			try{
 				File fileToMove = new File(fileList.get(i).getAbsolutePath());
@@ -116,6 +116,7 @@ public class FileOrganizer extends FileController {
 	
 	public void deleteEmptyFolders(){
 		//TODO
+		
 	}
 	
 	public void createDirectories(){
