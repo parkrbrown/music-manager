@@ -9,13 +9,11 @@ import mp3agic.InvalidDataException;
 import mp3agic.Mp3File;
 import mp3agic.UnsupportedTagException;
 
-
 /*
  * This class combines with TagEditWindow.java. It pulls data from the user
  * clicks confirm and updates the selected tags with their choices.
  */
 public class TagEditor extends FileController {
-
     private ArrayList<File> fileList;
     private ArrayList<Mp3File> mp3List;
     private String newArtist = null;
@@ -31,7 +29,9 @@ public class TagEditor extends FileController {
      */
     public void updateTags() {
         //VARIABLES
+    	System.out.println("Testing123");
         fileList = findMP3s(MainController.CurrentDirectory.getAbsoluteFile()); //Builds list of files that are mp3s
+        mp3List = new ArrayList<>();
         //Converts fileList into a list of Mp3Files
         for (int count = 0; count < fileList.size(); count++) {
             Mp3File temp = null;
@@ -65,7 +65,7 @@ public class TagEditor extends FileController {
             //Checks for tag and creates one if necessary
             checkForTag(mp3List.get(index));
             //Gets the tag from the file
-            ID3v1Tag thisTag = getTag(mp3List.get(index));
+            ID3v2Tag thisTag = getTag(mp3List.get(index));
             //Updates tag
             if (newArtist != null) {
                 thisTag.setArtist(newArtist);
@@ -80,6 +80,7 @@ public class TagEditor extends FileController {
             StringBuffer FileName = new StringBuffer();
             FileName.append(fileList.get(index).getName());
             saveFile(fileList.get(index), fileList.get(index), mp3List.get(index), FileName);
+            System.out.println("Testing at end of method");
         }
     }
 }
