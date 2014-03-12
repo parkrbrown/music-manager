@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 import mp3agic.ID3v1Tag;
@@ -70,8 +71,8 @@ public class TagEditWindow extends JFrame implements ActionListener {
         this.Cancel.addActionListener(this);
 
         //Sets the location for each element
-        this.CurrentDirectory.setBounds(15, 25, 325, 25);
-        this.Browse.setBounds(350, 25, 90, 25);
+        this.CurrentDirectory.setBounds(15, 25, 325, 18);
+        this.Browse.setBounds(350, 20, 90, 25);
         this.CurDir.setBounds(15, 5, 325, 15);
 
         this.Artist.setBounds(15, 75, 65, 35);
@@ -137,7 +138,8 @@ public class TagEditWindow extends JFrame implements ActionListener {
             MainController.MainMenu.setEnabled(true);
         } else if (e.getSource() == Confirm) {
             if (Artist.isSelected() && Artist.getText() == null) {
-                //TODO Prompt user to fill in or de-select fields
+                int UserChoice = JOptionPane.showConfirmDialog(MainController.ReferenceFrame, "You left the Artist Tag selected and blank;\nthis will erase the Artist tag for all selected files!\nAre you sure you want to do this?");
+//                if(UserChoice)
             } else if (Album.isSelected() && Album.getText() == null) {
                 //TODO Prompt user to fill in or de-select fields
             } else {

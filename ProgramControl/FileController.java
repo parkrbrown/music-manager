@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import mp3agic.ID3v1Tag;
+import mp3agic.ID3v24Tag;
 import mp3agic.Mp3File;
 import mp3agic.NotSupportedException;
 
@@ -17,19 +17,22 @@ public class FileController {
 	
 	
 	public Mp3File checkForTag(Mp3File mp3) {
-		if(mp3.hasId3v1Tag())
+		if(mp3.hasId3v2Tag())
 		{
 			return mp3;
 		}
 		else
 		{
-			mp3.setId3v1Tag(new ID3v1Tag());
+			mp3.removeId3v2Tag();
+			mp3.removeId3v1Tag();
+			mp3.removeCustomTag();
+			mp3.setId3v2Tag(new ID3v24Tag());
 			return mp3;
 		}
 	}
 	
-	public ID3v1Tag getTag(Mp3File mp3) {
-		return (ID3v1Tag) mp3.getId3v1Tag();
+	public ID3v24Tag getTag(Mp3File mp3) {
+		return (ID3v24Tag) mp3.getId3v2Tag();
 	}
 	
     public void saveFile(File CurrentFile, File NewLocation, Mp3File FileToSave, StringBuffer NewName)

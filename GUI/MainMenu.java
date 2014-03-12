@@ -49,8 +49,8 @@ public class MainMenu extends JFrame implements ActionListener {
         this.Quit.addActionListener(this);
 
         //Sets the location for each element
-        this.CurrentDirectory.setBounds(15, 25, 325, 25);
-        this.Browse.setBounds(350, 25, 90, 25);
+        this.CurrentDirectory.setBounds(15, 25, 325, 18);
+        this.Browse.setBounds(350, 20, 90, 25);
         this.CurDir.setBounds(15, 5, 325, 15);
 
         this.Format.setBounds(15, 75, 150, 75);

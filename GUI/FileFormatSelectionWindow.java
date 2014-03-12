@@ -99,8 +99,8 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
         });
 
         //Sets the location for each element
-        this.CurrentDirectory.setBounds(15, 25, 520, 25);
-        this.Browse.setBounds(550, 25, 90, 25);
+        this.CurrentDirectory.setBounds(15, 25, 520, 18);
+        this.Browse.setBounds(550, 20, 90, 25);
         this.CurDir.setBounds(15, 5, 325, 15);
 
         this.Sort.setBounds(15, 65, 250, 225);
@@ -111,8 +111,8 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
         this.Up.setBounds(275, 165, 100, 40);
         this.Down.setBounds(275, 215, 100, 40);
 
-        this.Return.setBounds(435, 295, 100, 65);
-        this.Go.setBounds(550, 295, 200, 65);
+        this.Return.setBounds(425, 295, 100, 60);
+        this.Go.setBounds(535, 295, 100, 60);
 
         //Adds each Menu Bar element to the Menu Bar
         this.MenuBar.add(this.File);

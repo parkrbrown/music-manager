@@ -1,13 +1,15 @@
 package ProgramControl;
 
-import java.io.File;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		File test = new File("." + "\\test.mp3");
-		System.out.println(test.getName());
+		JFrame RF = new JFrame();
+		int test = JOptionPane.showConfirmDialog(RF, "Test");
+		System.out.println(test);
 	}
 
 }
