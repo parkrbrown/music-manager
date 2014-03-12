@@ -3,58 +3,249 @@ package ProgramControl;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
+import mp3agic.ID3v2;
+import mp3agic.InvalidDataException;
 import mp3agic.Mp3File;
+import mp3agic.UnsupportedTagException;
 
 
-public class FileOrganizer extends FileController {
-	private ArrayList<File> fileList = findMP3s(MainController.CurrentDirectory.getAbsoluteFile());
-	private ArrayList<File> nonMp3Files;
-	private static String rootDirectory = MainController.CurrentDirectory.getAbsolutePath();
-	
+public class FileOrganizer extends FileController {	
 	public FileOrganizer() {
 		// No tasks for constructor
 	}
 	
 	//Starting Method
-	public void organize() {
-		//Derek working here...
-		//Get cur directory and scan dir for mp3s
+	public void Organize()
+	{
+		//"Album", "Artist", "Genre", "Year"
+		PullFilesFromSubs();
+		DeleteSubs(MainController.CurrentDirectory);
+		ArrayList<String> OrganizationOrder = MainController.OSSW.getOrganizationOrder();
+//		ArrayList<String> FoldersToMake = FindFolders(MainController.CurrentDirectory, OrganizationOrder.get(0));
+		File[] FilesInMainDir = MainController.CurrentDirectory.listFiles();
+		ArrayList<Mp3File> Mp3sBeforeRename = new ArrayList<>();
+		ArrayList<Mp3File> Mp3sAfterRename = new ArrayList<>();
 		
-		verifyNoMp3sFound(); //if file !mp3 prompt user to move the file into a new folder, 
-			//re-run once files are out of the folder.  give absolute path for the dir that has non-mp3s
-		
-		
-		//move all mp3s from sub directories to current dir
-//		moveFilesToRoot();
-		//remove empty directories
-//		deleteEmptyFolders();
-		
-		//create new directories IAW user preferences  IGNORE CASE
-			//check if folder already exists
-				//if true
-					//don't make dir
-				//else create
-		//move files that have matching id3 tags to appropriate folder
-			//scan id3 field to match getFormatOrder().length
-				//if (field 1 matches)
-					//scan field 2;
-					//if (field 2 matches)
-					//add mp3 to array
-			//move files in array to the created directory
-		//static String rootDirectory = MainController.CurrentDirectory.getAbsolutePath();
-		
+		for(File temp : FilesInMainDir)
+		{
+			Mp3File tempMp3 = null;
+			try
+			{
+				tempMp3 = new Mp3File(temp.getAbsolutePath());
+			}
+			catch (UnsupportedTagException e)
+			{
+				// TODO Auto-generated catch block
+			}
+			catch (InvalidDataException e)
+			{
+				// TODO Auto-generated catch block
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+			}
+			
+			ID3v2 CurTag = tempMp3.getId3v2Tag();
+			StringBuffer NewName = new StringBuffer();
+			for(int k = 0; k < OrganizationOrder.size(); k++)
+			{
+				if(OrganizationOrder.get(k).equals("Genre"))
+				{
+					NewName.append("\\" + CurTag.getGenreDescription());
+				}
+				else if(OrganizationOrder.get(k).equals("Artist"))
+				{
+					NewName.append("\\" + CurTag.getArtist());
+				}
+				else if(OrganizationOrder.get(k).equals("Album"))
+				{
+					NewName.append("\\" + CurTag.getAlbum());
+				}
+				else if(OrganizationOrder.get(k).equals("Year"))
+				{
+					NewName.append("\\" + CurTag.getYear());
+				}
+			}
+			StringBuffer NewLocation = new StringBuffer();
+			NewLocation.append(MainController.CurrentDirectory);
+			if(NewLocation.charAt((NewLocation.length() - 1)) == '\\')
+			{
+				NewLocation.deleteCharAt((NewLocation.length() - 1);
+			}
+			NewLocation.append(NewName.toString());
+			saveFile(temp.getAbsoluteFile(), (new File(NewLocation.toString())), tempMp3, NewName);
+		}
 	}
 	
-//	public void moveFile(/*String oldPath, String newPath*/){
+	private void PullFilesFromSubs()
+	{
+		ArrayList<File> mp3s = MainController.FileController.findMP3s(MainController.CurrentDirectory);
+		for(File temp : mp3s)
+		{
+			StringBuffer test = new StringBuffer();
+			test.append(temp.getName());
+			try {
+				MainController.FileController.saveFile(temp, (new File("E:\\")), (new Mp3File(temp.getAbsolutePath())), test);
+			} catch (UnsupportedTagException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvalidDataException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void DeleteSubs(File Directory)
+	{
+		File[] Files = Directory.listFiles();
+		for(File CurFile : Files)
+		{
+			if(CurFile.isDirectory())
+			{
+				File[] FilesInSub = CurFile.listFiles();
+				if(!(FilesInSub.length != 0))
+				{
+					for(File temp : FilesInSub)
+					{
+						DeleteSubs(temp);
+					}
+					CurFile.delete();
+				}
+				else
+				{
+					CurFile.delete();
+				}
+			}
+		}
+	}
+	
+//	private ArrayList<String> FindFolders(File Directory, String OrderBy)
+//	{
+//		File[] MP3s = Directory.listFiles();
+//		int CurrentOrganizer = -1;
+//		if(OrderBy.equals("Genre"))
+//		{
+//			CurrentOrganizer = 0;
+//		}
+//		else if(OrderBy.equals("Artist"))
+//		{
+//			CurrentOrganizer = 1;
+//		}
+//		else if(OrderBy.equals("Album"))
+//		{
+//			CurrentOrganizer = 2;
+//		}
+//		else if(OrderBy.equals("Year"))
+//		{
+//			CurrentOrganizer = 3;
+//		}
+//		
+//		ArrayList<String> FoldersToMake = new ArrayList<>();
+//		for(File Temp : MP3s)
+//		{
+//			Mp3File TempMp3 = null;
+//			try
+//			{
+//				TempMp3 = new Mp3File(Temp.getAbsolutePath());
+//			}
+//			catch (UnsupportedTagException e)
+//			{
+//				// TODO Auto-generated catch block
+//			}
+//			catch (InvalidDataException e)
+//			{
+//				// TODO Auto-generated catch block
+//			}
+//			catch (IOException e)
+//			{
+//				// TODO Auto-generated catch block
+//			}
+//			
+//			boolean InList = false;
+//			for(int i = 0; i < FoldersToMake.size(); i++)
+//			{
+//				if(CurrentOrganizer == 0)
+//				{
+//					if(TempMp3.getId3v2Tag().getGenreDescription().equals(FoldersToMake.get(i)))
+//					{
+//						InList = true;
+//					}
+//				}
+//				else if(CurrentOrganizer == 1)
+//				{
+//					if(TempMp3.getId3v2Tag().getArtist().equals(FoldersToMake.get(i)))
+//					{
+//						InList = true;
+//					}
+//				}
+//				else if(CurrentOrganizer == 2)
+//				{
+//					if(TempMp3.getId3v2Tag().getAlbum().equals(FoldersToMake.get(i)))
+//					{
+//						InList = true;
+//					}
+//				}
+//				else if(CurrentOrganizer == 3)
+//				{
+//					if(TempMp3.getId3v2Tag().getYear().equals(FoldersToMake.get(i)))
+//					{
+//						InList = true;
+//					}
+//				}
+//			}
+//			
+//			if(!InList)
+//			{
+//				if(CurrentOrganizer == 0)
+//				{
+//					FoldersToMake.add(TempMp3.getId3v2Tag().getGenreDescription());
+//				}
+//				else if(CurrentOrganizer == 1)
+//				{
+//					FoldersToMake.add(TempMp3.getId3v2Tag().getArtist());
+//				}
+//				else if(CurrentOrganizer == 2)
+//				{
+//					FoldersToMake.add(TempMp3.getId3v2Tag().getAlbum());
+//				}
+//				else if(CurrentOrganizer == 3)
+//				{
+//					FoldersToMake.add(TempMp3.getId3v2Tag().getYear());
+//				}
+//			}
+//		}
+//		return FoldersToMake;
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/******************************************************************************************************************************************************
+//	public void moveFile(/*String oldPath, String newPath/){
 //		// TODO move file from oldPath to newPath
 //		// For an individual file
 //		
 //		//or use Files.move()
 //	}
 	
-	private void verifyNoMp3sFound() /* TODO throws Exception */ {
+	private void verifyNoMp3sFound() /* TODO throws Exception / {
 		ArrayList<File> nonMp3Files = findNonMP3s();
 		
 		if (nonMp3Files.size() > 0) {
@@ -143,5 +334,5 @@ public class FileOrganizer extends FileController {
 	
 	
 	
-
+	******************************************************************************************************************************************************/
 }

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -12,6 +13,7 @@ import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JTextArea;
+import javax.swing.ListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -143,12 +145,12 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
 
     public ArrayList<String> getOrganizationOrder() {
         ArrayList<String> ItemsInOrder = new ArrayList<String>();
-        int i = 0;
-        while (((String.valueOf(Order.getComponent(i)) != null) || ((String.valueOf(Order.getComponent(i)) != "")))) {
-            ItemsInOrder.add(String.valueOf(Order.getComponent(i)));
-            i++;
-        }
-        return ItemsInOrder;
+        ListModel Temp = Order.getModel();
+		for(int j = 0; j < Temp.getSize(); j++)
+		{
+			ItemsInOrder.add((String) Temp.getElementAt(j));
+		}
+		return ItemsInOrder;
     }
 
     @Override
@@ -222,7 +224,7 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
             MainController.MainMenu.setEnabled(true);
             MainController.OSSW.setVisible(false);
         } else if (e.getSource() == Go) {
-            MainController.FO.organize();
+            MainController.FO.Organize();
             MainController.MainMenu.setEnabled(true);
             MainController.OSSW.setVisible(false);
         }

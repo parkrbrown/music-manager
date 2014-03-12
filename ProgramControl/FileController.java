@@ -84,7 +84,7 @@ public class FileController {
 		
 		try
 		{
-			Files.move((Paths.get(CurrentFile.getAbsolutePath())), (Paths.get(NewLocation.getAbsolutePath())), REPLACE_EXISTING);
+			Files.move((Paths.get(CurrentFile.getAbsolutePath())), (Paths.get(NewLocation.getAbsolutePath() + CurrentFile.getName())), REPLACE_EXISTING);
 		}
 		catch (IOException e)
 		{
@@ -123,7 +123,11 @@ public class FileController {
 					}
 				//If a sub-directory is found, search for mp3s in that directory
 				} else if (file.isDirectory()){
-					findMP3s(file);
+					ArrayList<File> dirFiles = findMP3s(file);
+					for(File temp : dirFiles)
+					{
+						mp3Files.add(temp);
+					}
 				}
 			}
     	}
