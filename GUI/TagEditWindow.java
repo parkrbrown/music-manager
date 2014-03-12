@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /*
- * Description and JavaDocs here
+ * Description and JavaDocs here //TODO
  */
 @SuppressWarnings({"serial", "rawtypes", "unchecked"})
 public class TagEditWindow extends JFrame implements ActionListener {
@@ -117,7 +117,6 @@ public class TagEditWindow extends JFrame implements ActionListener {
             if (Location == JFileChooser.APPROVE_OPTION) {
                 MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
             }
-
             this.CurrentDirectory.setText(MainController.CurrentDirectory.toString());
         } else if (event.getSource() == Cancel) {
             MainController.TEW.setVisible(false);
