@@ -10,10 +10,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import mp3agic.ID3v1Tag;
-import mp3agic.InvalidDataException;
 import mp3agic.Mp3File;
 import mp3agic.NotSupportedException;
-import mp3agic.UnsupportedTagException;
 
 public class FileController {
 	
@@ -59,6 +57,10 @@ public class FileController {
 		{
 			// TODO
 		}
+		
+		String Remove = "\\" + NewName;
+		File RemoveThis = new File("." + Remove);
+		RemoveThis.delete();
     }
     
     public ArrayList<File> findMP3s(File Directory) {

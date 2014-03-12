@@ -77,7 +77,9 @@ public class TagEditor extends FileController {
                 thisTag.setGenre(newGenre);
             }
             //Saves file
-            saveFile(fileList.get(index), fileList.get(index), mp3List.get(index));
+            StringBuffer FileName = new StringBuffer();
+            FileName.append(fileList.get(index).getName());
+            saveFile(fileList.get(index), fileList.get(index), mp3List.get(index), FileName);
         }
     }
 }
