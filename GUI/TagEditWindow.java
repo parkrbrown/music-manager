@@ -1,5 +1,7 @@
 package GUI;
 
+import ProgramControl.MainController;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -15,21 +17,21 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
-import mp3agic.ID3v1Tag;
-import ProgramControl.MainController;
-
+/*
+ * Description and JavaDocs here
+ */
 @SuppressWarnings({"serial", "rawtypes", "unchecked"})
 public class TagEditWindow extends JFrame implements ActionListener {
-
+	//VARIABLES
     private JMenuBar MenuBar;
     private JMenu File, Edit, View, Help;
     private JTextArea CurrentDirectory;
     private JLabel CurDir;
     private JButton Browse, Cancel, Confirm;
     private JCheckBox Artist, Album, Genre;
-    private JTextArea TArtist, TAlbum;  //TGenre replaced by GenreSelection
+    private JTextArea TArtist, TAlbum;
     private JComboBox GenreSelection;
-    private int SelectedGenre;
+    private int SelectedGenre = 0;
 
     public TagEditWindow() {
         this.setLayout(null);
@@ -62,11 +64,9 @@ public class TagEditWindow extends JFrame implements ActionListener {
 
         //Adds the Action Listener to each element that requires one
         this.Browse.addActionListener(this);
-
         this.Artist.addActionListener(this);
         this.Album.addActionListener(this);
         this.Genre.addActionListener(this);
-
         this.Confirm.addActionListener(this);
         this.Cancel.addActionListener(this);
 
@@ -74,15 +74,12 @@ public class TagEditWindow extends JFrame implements ActionListener {
         this.CurrentDirectory.setBounds(15, 25, 325, 18);
         this.Browse.setBounds(350, 20, 90, 25);
         this.CurDir.setBounds(15, 5, 325, 15);
-
         this.Artist.setBounds(15, 75, 65, 35);
         this.Album.setBounds(15, 125, 65, 35);
         this.Genre.setBounds(15, 175, 65, 35);
-
         this.TArtist.setBounds(85, 82, 150, 20);
         this.TAlbum.setBounds(85, 132, 150, 20);
         this.GenreSelection.setBounds(85, 182, 150, 20);
-
         this.Cancel.setBounds(280, 222, 85, 35);
         this.Confirm.setBounds(370, 222, 85, 35);
 
@@ -94,19 +91,15 @@ public class TagEditWindow extends JFrame implements ActionListener {
 
         //Adds each element to the Window
         this.add(MenuBar);
-
         this.add(CurrentDirectory);
         this.add(Browse);
         this.add(CurDir);
-
         this.add(Artist);
         this.add(Album);
         this.add(Genre);
-
         this.add(TArtist);
         this.add(TAlbum);
         this.add(GenreSelection);
-
         this.add(Cancel);
         this.add(Confirm);
 
@@ -117,49 +110,42 @@ public class TagEditWindow extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
     }
 
-    public void itemStateChanged(ItemEvent e) {
-        if (e.getStateChange() == ItemEvent.SELECTED) {
-            JComboBox GenreSelection = (JComboBox) e.getSource();
-            SelectedGenre = GenreSelection.getSelectedIndex();
-        }
-    }
-
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == Browse) {
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == Browse) {
             int Location = MainController.FileChooser.showOpenDialog(MainController.ReferenceFrame);
             if (Location == JFileChooser.APPROVE_OPTION) {
                 MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
             }
 
             this.CurrentDirectory.setText(MainController.CurrentDirectory.toString());
-        } else if (e.getSource() == Cancel) {
+        } else if (event.getSource() == Cancel) {
             MainController.TEW.setVisible(false);
             MainController.MainMenu.setEnabled(true);
-        } else if (e.getSource() == Confirm) {
+        } else if (event.getSource() == Confirm) {
+        	SelectedGenre = GenreSelection.getSelectedIndex();
             if (Artist.isSelected() && Artist.getText() == null) {
                 int UserChoice = JOptionPane.showConfirmDialog(MainController.ReferenceFrame, "You left the Artist Tag selected and blank;\nthis will erase the Artist tag for all selected files!\nAre you sure you want to do this?");
-//                if(UserChoice)
+           			//if(UserChoice)
             } else if (Album.isSelected() && Album.getText() == null) {
                 //TODO Prompt user to fill in or de-select fields
             } else {
                 MainController.TE.updateTags();
                 //TODO Set main menu visible and hide this menu??
             }
-
-        } else if (e.getSource() == Artist) {
+        } else if (event.getSource() == Artist) {
             if (TArtist.isEditable()) {
                 TArtist.setEditable(false);
             } else {
                 TArtist.setEditable(true);
             }
-        } else if (e.getSource() == Album) {
+        } else if (event.getSource() == Album) {
             if (TAlbum.isEditable()) {
                 TAlbum.setEditable(false);
             } else {
                 TAlbum.setEditable(true);
             }
-        } else if (e.getSource() == Genre) {
+        } else if (event.getSource() == Genre) {
             if (GenreSelection.isEditable()) {
                 GenreSelection.setEditable(false);
             } else {
@@ -175,7 +161,6 @@ public class TagEditWindow extends JFrame implements ActionListener {
             return false;
         }
     }
-
     public boolean isAlbumSelected() {
         if (Album.isSelected()) {
             return true;
@@ -183,7 +168,6 @@ public class TagEditWindow extends JFrame implements ActionListener {
             return false;
         }
     }
-
     public boolean isGenreSelected() {
         if (Genre.isSelected()) {
             return true;
@@ -195,11 +179,9 @@ public class TagEditWindow extends JFrame implements ActionListener {
     public JCheckBox getArtist() {
         return Artist;
     }
-
     public JCheckBox getAlbum() {
         return Album;
     }
-
     public JCheckBox getGenre() {
         return Genre;
     }
@@ -207,11 +189,9 @@ public class TagEditWindow extends JFrame implements ActionListener {
     public String getTArtist() {
         return TArtist.getText();
     }
-
     public String getTAlbum() {
         return TAlbum.getText();
     }
-
     public int getSelectedGenre() {
         return SelectedGenre;
     }

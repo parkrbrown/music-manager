@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+import mp3agic.ID3v2;
 import mp3agic.ID3v24Tag;
 import mp3agic.Mp3File;
 import mp3agic.NotSupportedException;
@@ -31,10 +32,39 @@ public class FileController {
 		}
 	}
 	
-	public ID3v24Tag getTag(Mp3File mp3) {
-		return (ID3v24Tag) mp3.getId3v2Tag();
+	public ID3v2 getTag(Mp3File mp3) {
+		
+		return mp3.getId3v2Tag();
 	}
 	
+	//Tag Edit Method
+	public void saveFile(File CurrentFile, File NewLocation, Mp3File FileToSave)
+    {
+    	try
+		{
+			Mp3File Moving = FileToSave;
+			Moving.save((CurrentFile.getName()));
+		}
+		catch (NotSupportedException | IOException e)
+		{
+			// TODO
+		}
+		
+		try
+		{
+			Files.move((Paths.get(".\\" + CurrentFile.getName())), (Paths.get(NewLocation.getAbsolutePath())), REPLACE_EXISTING);
+		}
+		catch (IOException e)
+		{
+			// TODO
+		}
+		
+		String Remove = "\\" + CurrentFile.getName();
+		File RemoveThis = new File("." + Remove);
+		RemoveThis.delete();
+    }
+	
+	//Rename Method
     public void saveFile(File CurrentFile, File NewLocation, Mp3File FileToSave, StringBuffer NewName)
     {
     	try
