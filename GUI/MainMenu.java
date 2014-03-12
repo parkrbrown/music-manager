@@ -12,9 +12,11 @@ import javax.swing.JTextArea;
 
 import ProgramControl.MainController;
 
+/*
+ * DESCRIPTION AND JAVADOCS TODO
+ */
 @SuppressWarnings("serial")
 public class MainMenu extends JFrame implements ActionListener {
-
     private JMenuBar MenuBar;
     private JMenu File, Edit, View, Help;
     private JTextArea CurrentDirectory;
@@ -52,7 +54,6 @@ public class MainMenu extends JFrame implements ActionListener {
         this.CurrentDirectory.setBounds(15, 25, 325, 18);
         this.Browse.setBounds(350, 20, 90, 25);
         this.CurDir.setBounds(15, 5, 325, 15);
-
         this.Format.setBounds(15, 75, 150, 75);
         this.EditTags.setBounds(15, 175, 150, 75);
         this.Organize.setBounds(200, 75, 150, 75);
@@ -66,11 +67,9 @@ public class MainMenu extends JFrame implements ActionListener {
 
         //Adds each element to the Window
         this.add(MenuBar);
-
         this.add(CurrentDirectory);
         this.add(Browse);
         this.add(CurDir);
-
         this.add(Format);
         this.add(EditTags);
         this.add(Organize);
@@ -84,27 +83,30 @@ public class MainMenu extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == Browse) {
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == Browse) {
             int Location = MainController.FileChooser.showOpenDialog(MainController.ReferenceFrame);
             if (Location == JFileChooser.APPROVE_OPTION) {
                 MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
             }
-
             this.CurrentDirectory.setText(MainController.CurrentDirectory.toString());
-        } else if (e.getSource() == Format) {
+        }
+        else if (event.getSource() == Format) {
             MainController.MainMenu.setEnabled(false);
             MainController.FFSW = new FileFormatSelectionWindow();
             MainController.FFSW.setVisible(true);
-        } else if (e.getSource() == EditTags) {
+        }
+        else if (event.getSource() == EditTags) {
             MainController.MainMenu.setEnabled(false);
             MainController.TEW = new TagEditWindow();
             MainController.TEW.setVisible(true);
-        } else if (e.getSource() == Organize) {
+        }
+        else if (event.getSource() == Organize) {
             MainController.MainMenu.setEnabled(false);
             MainController.OSSW = new OrganizationStyleSelectionWindow();
             MainController.OSSW.setVisible(true);
-        } else if (e.getSource() == Quit) {
+        }
+        else if (event.getSource() == Quit) {
             System.exit(0);
         }
     }
