@@ -14,7 +14,7 @@ import mp3agic.UnsupportedTagException;
 /*
  * This class combines with TagEditWindow.java. It pulls data from the user
  * clicks confirm and updates the selected tags with their choices.
- * JAVADOCS HERE
+ * JAVADOCS HERE //TODO
  */
 public class TagEditor extends FileController {
     private ArrayList<File> fileList;
@@ -81,8 +81,8 @@ public class TagEditor extends FileController {
             
             mp3Temp.setId3v2Tag(thisTag);
             
-//            File RemoveThis = fileList.get(index);
-//            RemoveThis.delete();
+            //File RemoveThis = fileList.get(index);
+            //RemoveThis.delete();
             
             //Saves file
             saveFile(fileList.get(index), fileList.get(index), mp3Temp);

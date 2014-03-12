@@ -8,101 +8,84 @@ import mp3agic.InvalidDataException;
 import mp3agic.Mp3File;
 import mp3agic.UnsupportedTagException;
 
-
-
+/*
+ * DESCRIPTION AND JAVADOCS TODO
+ */
 public class FilenameFormatter extends FileController {
 	public FilenameFormatter() {
-
+		//No tasks for Constructor
 	}
 	
-	//Renames the mp3 filename according to user preferences
-	public void format(){
+	/*
+	 * Renames the mp3 filename according to user preferences
+	 */
+	public void format() {
 		ArrayList<File> mp3s = findMP3s(MainController.CurrentDirectory);
 		ArrayList<String> renameTo = MainController.FFSW.getFormatOrder();
 		
-		for(int i = 0; i < mp3s.size(); i++){
+		for (int i = 0; i < mp3s.size(); i++) {
 			Mp3File mp3 = null;
 			try {
 				mp3 = new Mp3File(mp3s.get(i).getAbsolutePath());
-			} catch (UnsupportedTagException e) {
+			} catch (UnsupportedTagException exception) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InvalidDataException e) {
+				exception.printStackTrace();
+			} catch (InvalidDataException exception) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
+				exception.printStackTrace();
+			} catch (IOException exception) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				exception.printStackTrace();
 			}
 			
 			StringBuffer NewName = new StringBuffer();
-			for(int j = 0; j < renameTo.size(); j++)
-			{
-				if(renameTo.get(j).equals("Title"))
-				{
-					if(!((mp3.getId3v2Tag().getTitle()) == null))
-					{
+			for (int j = 0; j < renameTo.size(); j++) {
+				if (renameTo.get(j).equals("Title")) {
+					if (!((mp3.getId3v2Tag().getTitle()) == null)) {
 						NewName.append(mp3.getId3v2Tag().getTitle());
 						NewName.append(" - ");
 					}
-					else
-					{
+					else {
 						NewName.append("[No Title Found]");
 						NewName.append(" - ");
 					}
 				}
-				
-				else if(renameTo.get(j).equals("Album"))
-				{
-					if(!((mp3.getId3v2Tag().getAlbum()) == null))
-					{
+				else if (renameTo.get(j).equals("Album")) {
+					if (!((mp3.getId3v2Tag().getAlbum()) == null)) {
 						NewName.append(mp3.getId3v2Tag().getAlbum());
 						NewName.append(" - ");
 					}
-					else
-					{
+					else {
 						NewName.append("[No Album Found]");
 						NewName.append(" - ");
 					}
 				}
-				
-				else if(renameTo.get(j).equals("Artist"))
-				{
-					if(!((mp3.getId3v2Tag().getArtist()) == null))
-					{
+				else if (renameTo.get(j).equals("Artist")) {
+					if (!((mp3.getId3v2Tag().getArtist()) == null)) {
 						NewName.append(mp3.getId3v2Tag().getArtist());
 						NewName.append(" - ");
 					}
-					else
-					{
+					else {
 						NewName.append("[No Artist Found]");
 						NewName.append(" - ");
 					}
 				}
-				
-				else if(renameTo.get(j).equals("Year"))
-				{
-					if(!((mp3.getId3v2Tag().getYear()) == null))
-					{
+				else if (renameTo.get(j).equals("Year")) {
+					if (!((mp3.getId3v2Tag().getYear()) == null)) {
 						NewName.append(mp3.getId3v2Tag().getYear());
 						NewName.append(" - ");
 					}
-					else
-					{
+					else {
 						NewName.append("[No Year Found]");
 						NewName.append(" - ");
 					}
 				}
-				
-				else if(renameTo.get(j).equals("Genre"))
-				{
-					if(!((mp3.getId3v2Tag().getGenreDescription()) == null))
-					{
+				else if (renameTo.get(j).equals("Genre")) {
+					if (!((mp3.getId3v2Tag().getGenreDescription()) == null)) {
 						NewName.append(mp3.getId3v2Tag().getGenreDescription());
 						NewName.append(" - ");
 					}
-					else
-					{
+					else {
 						NewName.append("[No Genre Found]");
 						NewName.append(" - ");
 					}

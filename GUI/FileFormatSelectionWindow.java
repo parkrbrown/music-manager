@@ -20,9 +20,11 @@ import javax.swing.event.ListSelectionListener;
 
 import ProgramControl.MainController;
 
+/*
+ * DESCRIPTION AND JAVADOCS TODO
+ */
 @SuppressWarnings({"serial", "rawtypes", "unchecked"})
 public class FileFormatSelectionWindow extends JFrame implements ActionListener {
-
     private JMenuBar MenuBar;
     private JMenu File, Edit, View, Help;
     private JTextArea CurrentDirectory;
@@ -52,7 +54,6 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
         this.Remove = new JButton("Remove");
         this.Up = new JButton("Move Up");
         this.Down = new JButton("Move Down");
-
         this.Return = new JButton("<html><center>Return To Main Menu</center></html>");
         this.Go = new JButton("<html><center>Rename MP3s</center></htm>");
 
@@ -75,25 +76,24 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
         this.Remove.addActionListener(this);
         this.Up.addActionListener(this);
         this.Down.addActionListener(this);
-
         this.Return.addActionListener(this);
         this.Go.addActionListener(this);
 
         //Adds the List Listener to each list
         this.Sort.addListSelectionListener(new ListSelectionListener() {
             @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
-//    				SortSelectedItem = (String)Sort.getSelectedValue();
+            public void valueChanged(ListSelectionEvent event) {
+                if (!event.getValueIsAdjusting()) {
+    				//SortSelectedItem = (String)Sort.getSelectedValue();
                 }
             }
         });
 
         this.Ignore.addListSelectionListener(new ListSelectionListener() {
             @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
-//    				IgnoreSelectedItem = (String)Ignore.getSelectedValue();
+            public void valueChanged(ListSelectionEvent event) {
+                if (!event.getValueIsAdjusting()) {
+    				//IgnoreSelectedItem = (String)Ignore.getSelectedValue();
                 }
             }
         });
@@ -102,15 +102,12 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
         this.CurrentDirectory.setBounds(15, 25, 520, 18);
         this.Browse.setBounds(550, 20, 90, 25);
         this.CurDir.setBounds(15, 5, 325, 15);
-
         this.Sort.setBounds(15, 65, 250, 225);
         this.Ignore.setBounds(385, 65, 250, 225);
-
         this.Add.setBounds(275, 65, 100, 40);
         this.Remove.setBounds(275, 115, 100, 40);
         this.Up.setBounds(275, 165, 100, 40);
         this.Down.setBounds(275, 215, 100, 40);
-
         this.Return.setBounds(425, 295, 100, 60);
         this.Go.setBounds(535, 295, 100, 60);
 
@@ -122,19 +119,15 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
 
         //Adds each element to the Window
         this.add(MenuBar);
-
         this.add(CurrentDirectory);
         this.add(Browse);
         this.add(CurDir);
-
         this.add(Sort);
         this.add(Ignore);
-
         this.add(Add);
         this.add(Remove);
         this.add(Up);
         this.add(Down);
-
         this.add(Return);
         this.add(Go);
 
@@ -145,34 +138,27 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
         this.setLocationRelativeTo(null);
     }
 
-    public ArrayList<String> getFormatOrder()
-	{
+    public ArrayList<String> getFormatOrder() {
 		ArrayList<String> ItemsInOrder = new ArrayList<String>();
 		ListModel Temp = Sort.getModel();
-		for(int j = 0; j < Temp.getSize(); j++)
-		{
+		for (int j = 0; j < Temp.getSize(); j++) {
 			ItemsInOrder.add((String) Temp.getElementAt(j));
 		}
 		return ItemsInOrder;
 	}
-	
 
-	@Override
-	public void actionPerformed(ActionEvent e)
-	{
-		if(e.getSource() == Browse)
-		{
+    @Override
+	public void actionPerformed(ActionEvent event) {
+		if (event.getSource() == Browse) {
 			int Location = MainController.FileChooser.showOpenDialog(MainController.ReferenceFrame);
-			if(Location == JFileChooser.APPROVE_OPTION)
-			{
+			if (Location == JFileChooser.APPROVE_OPTION) {
 				MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
 			}
 			
 			this.CurrentDirectory.setText(MainController.CurrentDirectory.toString());
 		}
-		
-		else if(e.getSource() == Add)
-		{
+	
+		else if (event.getSource() == Add) {
 			SortItems.add((String)Ignore.getSelectedValue());
 			IgnoreItems.remove(Ignore.getSelectedIndex());
 			
@@ -183,7 +169,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
 			this.Ignore = new JList(IgnoreItems.toArray());
 			
 			this.Sort.setBounds(15, 65, 250, 225);
-	    	this.Ignore.setBounds(385, 65, 250, 225);			
+	    	this.Ignore.setBounds(385, 65, 250, 225);
 			this.add(Sort);
 			this.add(Ignore);
 			
@@ -191,14 +177,11 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
 			MainController.FFSW.setVisible(true);
 		}
 		
-		else if(e.getSource() == Remove)
-		{
-			if(((String)Sort.getSelectedValue()).equals("Title"))
-			{
+		else if (event.getSource() == Remove) {
+			if (((String)Sort.getSelectedValue()).equals("Title")) {
 				JOptionPane.showMessageDialog(MainController.ReferenceFrame, "You must include the song title in the file name!", "Invalid Option Choice", JOptionPane.WARNING_MESSAGE);
 			}
-			else
-			{
+			else {
 				IgnoreItems.add((String)Sort.getSelectedValue());
 				SortItems.remove(Sort.getSelectedIndex());
 				
@@ -218,8 +201,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
 			}
 		}
 		
-		else if(e.getSource() == Up)
-		{
+		else if (event.getSource() == Up) {
 			Collections.swap(SortItems, Sort.getSelectedIndex(), (Sort.getSelectedIndex() - 1));
 
 			this.remove(Sort);
@@ -233,8 +215,7 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
 			MainController.FFSW.setVisible(true);
 		}
 		
-		else if(e.getSource() == Down)
-		{
+		else if (event.getSource() == Down) {
 			Collections.swap(SortItems, Sort.getSelectedIndex(), (Sort.getSelectedIndex() + 1));
 
 			this.remove(Sort);
@@ -248,15 +229,13 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
 			MainController.FFSW.setVisible(true);
 		}
 		
-		else if(e.getSource() == Return)
-		{
+		else if (event.getSource() == Return) {
 			MainController.MainMenu.setEnabled(true);
 			MainController.FFSW.setVisible(false);
 		}
 		
-		else if(e.getSource() == Go)
-		{
-			MainController.FNF.format();;
+		else if(event.getSource() == Go) {
+			MainController.FNF.format();
 			MainController.MainMenu.setEnabled(true);
 			MainController.FFSW.setVisible(false);
 		}

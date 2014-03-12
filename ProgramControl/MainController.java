@@ -13,13 +13,12 @@ import GUI.TagEditWindow;
 
 /**
  * The MainController
+ * DESCRIPTION AND JAVADOCS //TODO
  */
 public class MainController {
-
     //File Designation variables for Program
     public static File CurrentDirectory = new File("Libraries\\Music");
     public static JFileChooser FileChooser = new JFileChooser();
-    /*TODO Probably need a different class for limiting files*/
     public static FileNameExtensionFilter FileFilter = new FileNameExtensionFilter("MP3 Music Files", "mp3");
 
     //GUI Windows for Program
