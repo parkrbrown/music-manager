@@ -34,14 +34,14 @@ public class FileController {
 		return (ID3v1Tag) mp3.getId3v1Tag();
 	}
 	
-    public void saveFile(File CurrentFile, File NewLocation, Mp3File FileToSave)
+    public void saveFile(File CurrentFile, File NewLocation, Mp3File FileToSave, StringBuffer NewName)
     {
     	try
 		{
-			Mp3File Moving = new Mp3File(CurrentFile.getAbsolutePath());
-			Moving.save(Moving.getFilename());
+			Mp3File Moving = FileToSave;
+			Moving.save((NewName.toString()));
 		}
-		catch (NotSupportedException | IOException | UnsupportedTagException | InvalidDataException e)
+		catch (NotSupportedException | IOException e)
 		{
 			// TODO
 		}
@@ -61,7 +61,7 @@ public class FileController {
 		}
     }
     
-    public ArrayList<File> findMP3s() {
+    public ArrayList<File> findMP3s(File Directory) {
 		//Filter files by .mp3 extension
 		FilenameFilter mp3Filter = new FilenameFilter() {
 			public boolean accept(File dir, String name) {
@@ -69,7 +69,7 @@ public class FileController {
     		}
 		};
 
-		File directory = new File(MainController.CurrentDirectory.toString());
+		File directory = Directory;
 		//Add all files in directory to an array
 		File[] fileList = directory.listFiles(); 
 		ArrayList<File> mp3Files = new ArrayList<File>();
@@ -88,7 +88,7 @@ public class FileController {
 					}
 				//If a sub-directory is found, search for mp3s in that directory
 				} else if (file.isDirectory()){
-					findMP3s();
+					findMP3s(file);
 				}
 			}
     	}

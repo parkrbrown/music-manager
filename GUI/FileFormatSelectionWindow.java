@@ -14,6 +14,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.ListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -144,94 +145,120 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
         this.setLocationRelativeTo(null);
     }
 
-    public ArrayList<String> getFormatOrder() {
-        ArrayList<String> ItemsInSort = new ArrayList<String>();
-        int i = 0;
-        while (((String.valueOf(Sort.getComponent(i)) != null) || ((String.valueOf(Sort.getComponent(i)) != "")))) {
-            ItemsInSort.add(String.valueOf(Sort.getComponent(i)));
-            i++;
-        }
-        return ItemsInSort;
-    }
+    public ArrayList<String> getFormatOrder()
+	{
+		ArrayList<String> ItemsInOrder = new ArrayList<String>();
+		ListModel Temp = Sort.getModel();
+		for(int j = 0; j < Temp.getSize(); j++)
+		{
+			ItemsInOrder.add((String) Temp.getElementAt(j));
+		}
+		return ItemsInOrder;
+	}
+	
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == Browse) {
-            int Location = MainController.FileChooser.showOpenDialog(MainController.ReferenceFrame);
-            if (Location == JFileChooser.APPROVE_OPTION) {
-                MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
-            }
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		if(e.getSource() == Browse)
+		{
+			int Location = MainController.FileChooser.showOpenDialog(MainController.ReferenceFrame);
+			if(Location == JFileChooser.APPROVE_OPTION)
+			{
+				MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
+			}
+			
+			this.CurrentDirectory.setText(MainController.CurrentDirectory.toString());
+		}
+		
+		else if(e.getSource() == Add)
+		{
+			SortItems.add((String)Ignore.getSelectedValue());
+			IgnoreItems.remove(Ignore.getSelectedIndex());
+			
+			this.remove(Sort);
+			this.remove(Ignore);
+			
+			this.Sort = new JList(SortItems.toArray());
+			this.Ignore = new JList(IgnoreItems.toArray());
+			
+			this.Sort.setBounds(15, 65, 250, 225);
+	    	this.Ignore.setBounds(385, 65, 250, 225);			
+			this.add(Sort);
+			this.add(Ignore);
+			
+			MainController.FFSW.setVisible(false);
+			MainController.FFSW.setVisible(true);
+		}
+		
+		else if(e.getSource() == Remove)
+		{
+			if(((String)Sort.getSelectedValue()).equals("Title"))
+			{
+				JOptionPane.showMessageDialog(MainController.ReferenceFrame, "You must include the song title in the file name!", "Invalid Option Choice", JOptionPane.WARNING_MESSAGE);
+			}
+			else
+			{
+				IgnoreItems.add((String)Sort.getSelectedValue());
+				SortItems.remove(Sort.getSelectedIndex());
+				
+				this.remove(Sort);
+				this.remove(Ignore);
+				
+				this.Sort = new JList(SortItems.toArray());
+				this.Ignore = new JList(IgnoreItems.toArray());
+	
+				this.Sort.setBounds(15, 65, 250, 225);
+		    	this.Ignore.setBounds(385, 65, 250, 225);			
+				this.add(Sort);
+				this.add(Ignore);
+				
+				MainController.FFSW.setVisible(false);
+				MainController.FFSW.setVisible(true);
+			}
+		}
+		
+		else if(e.getSource() == Up)
+		{
+			Collections.swap(SortItems, Sort.getSelectedIndex(), (Sort.getSelectedIndex() - 1));
 
-            this.CurrentDirectory.setText(MainController.CurrentDirectory.toString());
-        } else if (e.getSource() == Add) {
-            SortItems.add((String) Ignore.getSelectedValue());
-            IgnoreItems.remove(Ignore.getSelectedIndex());
+			this.remove(Sort);
+			
+			this.Sort = new JList(SortItems.toArray());
 
-            this.remove(Sort);
-            this.remove(Ignore);
+			this.Sort.setBounds(15, 65, 250, 225);
+			this.add(Sort);
+			
+			MainController.FFSW.setVisible(false);
+			MainController.FFSW.setVisible(true);
+		}
+		
+		else if(e.getSource() == Down)
+		{
+			Collections.swap(SortItems, Sort.getSelectedIndex(), (Sort.getSelectedIndex() + 1));
 
-            this.Sort = new JList(SortItems.toArray());
-            this.Ignore = new JList(IgnoreItems.toArray());
+			this.remove(Sort);
+			
+			this.Sort = new JList(SortItems.toArray());
 
-            this.Sort.setBounds(15, 65, 250, 225);
-            this.Ignore.setBounds(385, 65, 250, 225);
-            this.add(Sort);
-            this.add(Ignore);
-
-            MainController.FFSW.setVisible(false);
-            MainController.FFSW.setVisible(true);
-        } else if (e.getSource() == Remove) {
-            if (((String) Sort.getSelectedValue()).equals("Title")) {
-                JOptionPane.showMessageDialog(MainController.ReferenceFrame, "You must include the song title in the file name!", "Invalid Option Choice", JOptionPane.WARNING_MESSAGE);
-            } else {
-                IgnoreItems.add((String) Sort.getSelectedValue());
-                SortItems.remove(Sort.getSelectedIndex());
-
-                this.remove(Sort);
-                this.remove(Ignore);
-
-                this.Sort = new JList(SortItems.toArray());
-                this.Ignore = new JList(IgnoreItems.toArray());
-
-                this.Sort.setBounds(15, 65, 250, 225);
-                this.Ignore.setBounds(385, 65, 250, 225);
-                this.add(Sort);
-                this.add(Ignore);
-
-                MainController.FFSW.setVisible(false);
-                MainController.FFSW.setVisible(true);
-            }
-        } else if (e.getSource() == Up) {
-            Collections.swap(SortItems, Sort.getSelectedIndex(), (Sort.getSelectedIndex() - 1));
-
-            this.remove(Sort);
-
-            this.Sort = new JList(SortItems.toArray());
-
-            this.Sort.setBounds(15, 65, 250, 225);
-            this.add(Sort);
-
-            MainController.FFSW.setVisible(false);
-            MainController.FFSW.setVisible(true);
-        } else if (e.getSource() == Down) {
-            Collections.swap(SortItems, Sort.getSelectedIndex(), (Sort.getSelectedIndex() + 1));
-
-            this.remove(Sort);
-
-            this.Sort = new JList(SortItems.toArray());
-
-            this.Sort.setBounds(15, 65, 250, 225);
-            this.add(Sort);
-
-            MainController.FFSW.setVisible(false);
-            MainController.FFSW.setVisible(true);
-        } else if (e.getSource() == Return) {
-            MainController.MainMenu.setEnabled(true);
-            MainController.FFSW.setVisible(false);
-        } else if (e.getSource() == Go) {
-            MainController.FNF.format();;
-            MainController.MainMenu.setEnabled(true);
-            MainController.FFSW.setVisible(false);
-        }
-    }
+			this.Sort.setBounds(15, 65, 250, 225);
+			this.add(Sort);
+			
+			MainController.FFSW.setVisible(false);
+			MainController.FFSW.setVisible(true);
+		}
+		
+		else if(e.getSource() == Return)
+		{
+			MainController.MainMenu.setEnabled(true);
+			MainController.FFSW.setVisible(false);
+		}
+		
+		else if(e.getSource() == Go)
+		{
+			MainController.FNF.format();;
+			MainController.MainMenu.setEnabled(true);
+			MainController.FFSW.setVisible(false);
+		}
+	}
 }

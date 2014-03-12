@@ -17,8 +17,7 @@ public class FilenameFormatter extends FileController {
 	
 	//Renames the mp3 filename according to user preferences
 	public void format(){
-		String currentDirectory = MainController.CurrentDirectory.getAbsolutePath();
-		ArrayList<File> mp3s = findMP3s();
+		ArrayList<File> mp3s = findMP3s(MainController.CurrentDirectory);
 		ArrayList<String> renameTo = MainController.FFSW.getFormatOrder();
 		
 		for(int i = 0; i < mp3s.size(); i++){
@@ -39,40 +38,80 @@ public class FilenameFormatter extends FileController {
 			StringBuffer NewName = new StringBuffer();
 			for(int j = 0; j < renameTo.size(); j++)
 			{
-				if(renameTo.get(j) == "Title")
+				if(renameTo.get(j).equals("Title"))
 				{
-					NewName.append(mp3.getId3v1Tag().getTitle());
-					NewName.append(" - ");
+					if(!((mp3.getId3v2Tag().getTitle()) == null))
+					{
+						NewName.append(mp3.getId3v2Tag().getTitle());
+						NewName.append(" - ");
+					}
+					else
+					{
+						NewName.append("[No Title Found]");
+						NewName.append(" - ");
+					}
 				}
 				
-				else if(renameTo.get(j) == "Album")
+				else if(renameTo.get(j).equals("Album"))
 				{
-					NewName.append(mp3.getId3v1Tag().getAlbum());
-					NewName.append(" - ");
+					if(!((mp3.getId3v2Tag().getAlbum()) == null))
+					{
+						NewName.append(mp3.getId3v2Tag().getAlbum());
+						NewName.append(" - ");
+					}
+					else
+					{
+						NewName.append("[No Album Found]");
+						NewName.append(" - ");
+					}
 				}
 				
-				else if(renameTo.get(j) == "Artist")
+				else if(renameTo.get(j).equals("Artist"))
 				{
-					NewName.append(mp3.getId3v1Tag().getArtist());
-					NewName.append(" - ");
+					if(!((mp3.getId3v2Tag().getArtist()) == null))
+					{
+						NewName.append(mp3.getId3v2Tag().getArtist());
+						NewName.append(" - ");
+					}
+					else
+					{
+						NewName.append("[No Artist Found]");
+						NewName.append(" - ");
+					}
 				}
 				
-				else if(renameTo.get(j) == "Year")
+				else if(renameTo.get(j).equals("Year"))
 				{
-					NewName.append(mp3.getId3v1Tag().getYear());
-					NewName.append(" - ");
+					if(!((mp3.getId3v2Tag().getYear()) == null))
+					{
+						NewName.append(mp3.getId3v2Tag().getYear());
+						NewName.append(" - ");
+					}
+					else
+					{
+						NewName.append("[No Year Found]");
+						NewName.append(" - ");
+					}
 				}
 				
-				else if(renameTo.get(j) == "Genre")
+				else if(renameTo.get(j).equals("Genre"))
 				{
-					NewName.append(mp3.getId3v1Tag().getGenreDescription());
-					NewName.append(" - ");
+					if(!((mp3.getId3v2Tag().getGenreDescription()) == null))
+					{
+						NewName.append(mp3.getId3v2Tag().getGenreDescription());
+						NewName.append(" - ");
+					}
+					else
+					{
+						NewName.append("[No Genre Found]");
+						NewName.append(" - ");
+					}
 				}
 			}
 			NewName.delete((NewName.length() - 3), NewName.length());
-			String NewFileName = currentDirectory + NewName.toString() + ".mp3";
+			String NewFileName = MainController.CurrentDirectory + "\\" + (NewName.toString()) + ".mp3";
 			
-			MainController.FileController.saveFile((new File(mp3s.get(i).getAbsolutePath())), (new File(NewFileName)), mp3);
+			MainController.FileController.saveFile((new File(mp3s.get(i).getAbsolutePath())), (new File(NewFileName)), mp3, NewName);
 		}
 	}
 }
