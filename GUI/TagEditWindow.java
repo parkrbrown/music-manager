@@ -118,33 +118,38 @@ public class TagEditWindow extends JFrame implements ActionListener {
                 MainController.CurrentDirectory = MainController.FileChooser.getSelectedFile();
             }
             this.CurrentDirectory.setText(MainController.CurrentDirectory.toString());
-        } else if (event.getSource() == Cancel) {
+        }
+        else if (event.getSource() == Cancel) {
             MainController.TEW.setVisible(false);
             MainController.MainMenu.setEnabled(true);
-        } else if (event.getSource() == Confirm) {
+        }
+        else if (event.getSource() == Confirm) {
         	SelectedGenre = GenreSelection.getSelectedIndex();
             if (Artist.isSelected() && Artist.getText() == null) {
                 int UserChoice = JOptionPane.showConfirmDialog(MainController.ReferenceFrame, "You left the Artist Tag selected and blank;\nthis will erase the Artist tag for all selected files!\nAre you sure you want to do this?");
-           			//if(UserChoice)
+           			//if(UserChoice) TODO
             } else if (Album.isSelected() && Album.getText() == null) {
                 //TODO Prompt user to fill in or de-select fields
             } else {
                 MainController.TE.updateTags();
                 //TODO Set main menu visible and hide this menu??
             }
-        } else if (event.getSource() == Artist) {
+        }
+        else if (event.getSource() == Artist) {
             if (TArtist.isEditable()) {
                 TArtist.setEditable(false);
             } else {
                 TArtist.setEditable(true);
             }
-        } else if (event.getSource() == Album) {
+        }
+        else if (event.getSource() == Album) {
             if (TAlbum.isEditable()) {
                 TAlbum.setEditable(false);
             } else {
                 TAlbum.setEditable(true);
             }
-        } else if (event.getSource() == Genre) {
+        }
+        else if (event.getSource() == Genre) {
             if (GenreSelection.isEditable()) {
                 GenreSelection.setEditable(false);
             } else {
