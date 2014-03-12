@@ -1,9 +1,7 @@
 package ProgramControl;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 
 import mp3agic.ID3v2;
@@ -26,8 +24,8 @@ public class FileOrganizer extends FileController {
 		ArrayList<String> OrganizationOrder = MainController.OSSW.getOrganizationOrder();
 //		ArrayList<String> FoldersToMake = FindFolders(MainController.CurrentDirectory, OrganizationOrder.get(0));
 		File[] FilesInMainDir = MainController.CurrentDirectory.listFiles();
-		ArrayList<Mp3File> Mp3sBeforeRename = new ArrayList<>();
-		ArrayList<Mp3File> Mp3sAfterRename = new ArrayList<>();
+//		ArrayList<Mp3File> Mp3sBeforeRename = new ArrayList<>();
+//		ArrayList<Mp3File> Mp3sAfterRename = new ArrayList<>();
 		
 		for(File temp : FilesInMainDir)
 		{
@@ -70,14 +68,17 @@ public class FileOrganizer extends FileController {
 					NewName.append("\\" + CurTag.getYear());
 				}
 			}
+			NewName.append("\\" + temp.getName());
 			StringBuffer NewLocation = new StringBuffer();
 			NewLocation.append(MainController.CurrentDirectory);
 			if(NewLocation.charAt((NewLocation.length() - 1)) == '\\')
 			{
-				NewLocation.deleteCharAt((NewLocation.length() - 1);
+				NewLocation.deleteCharAt((NewLocation.length() - 1));
 			}
 			NewLocation.append(NewName.toString());
-			saveFile(temp.getAbsoluteFile(), (new File(NewLocation.toString())), tempMp3, NewName);
+			StringBuffer TempName = new StringBuffer();
+			TempName.append(temp.getName());
+			saveFile((new File(temp.getAbsolutePath())), (new File(NewLocation.toString())), tempMp3, TempName);
 		}
 	}
 	
