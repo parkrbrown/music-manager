@@ -77,6 +77,33 @@ public class FileController {
 			// TODO
 		}
 		
+		try
+		{
+			Files.move((Paths.get(CurrentFile.getAbsolutePath())), (Paths.get(NewLocation.getAbsolutePath() + CurrentFile.getName())), REPLACE_EXISTING);
+		}
+		catch (IOException e)
+		{
+			// TODO
+		}
+		
+		String Remove = "\\" + NewName;
+		File RemoveThis = new File("." + Remove);
+		RemoveThis.delete();
+    }
+    
+  //Organize Method
+    public void saveFile(File CurrentFile, File NewLocation, Mp3File FileToSave, StringBuffer NewName, boolean trash)
+    {
+    	try
+		{
+			Mp3File Moving = FileToSave;
+			Moving.save((NewName.toString()));
+		}
+		catch (NotSupportedException | IOException e)
+		{
+			// TODO
+		}
+		
 		if(!(NewLocation.exists()))
 		{
 			NewLocation.mkdirs();

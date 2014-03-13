@@ -78,7 +78,7 @@ public class FileOrganizer extends FileController {
 			NewLocation.append(NewName.toString());
 			StringBuffer TempName = new StringBuffer();
 			TempName.append(temp.getName());
-			saveFile((new File(temp.getAbsolutePath())), (new File(NewLocation.toString())), tempMp3, TempName);
+			saveFile((new File(temp.getAbsolutePath())), (new File(NewLocation.toString())), tempMp3, TempName, true);
 		}
 	}
 	
