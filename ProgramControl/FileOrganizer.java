@@ -102,7 +102,7 @@ public class FileOrganizer extends FileController {
 			StringBuffer test = new StringBuffer();
 			test.append(temp.getName());
 			try {
-				MainController.FileController.saveFile((new File(temp.getAbsolutePath())), (new File(MainController.CurrentDirectory.getAbsolutePath())), (new Mp3File(temp.getAbsolutePath())), test);
+				saveFile((new File(temp.getAbsolutePath())), (new File(MainController.CurrentDirectory.getAbsolutePath())), (new Mp3File(temp.getAbsolutePath())), test);
 			} catch (UnsupportedTagException e) {
 			} catch (InvalidDataException e) {
 			} catch (IOException e) {
