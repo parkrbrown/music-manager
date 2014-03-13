@@ -53,7 +53,7 @@ public class OrganizationStyleSelectionWindow extends JFrame implements ActionLi
         this.Return = new JButton("<html><center>Return To Main Menu</center></html>");
         this.Go = new JButton("<html><center>Organize MP3s</center></htm>");
 
-        String[] Options = {/*TODO Tester*/"Album", "Artist", "Genre", "Year"};
+        String[] Options = {"Album", "Artist", "Genre", "Year"};
         this.Order = new JList();
         this.Exclude = new JList(Options);
 

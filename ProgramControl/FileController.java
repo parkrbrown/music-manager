@@ -47,7 +47,6 @@ public class FileController {
 		}
 		catch (NotSupportedException | IOException e)
 		{
-			// TODO
 		}
 		
 		try
@@ -56,7 +55,6 @@ public class FileController {
 		}
 		catch (IOException e)
 		{
-			// TODO
 		}
 		
 		String Remove = "\\" + CurrentFile.getName();
@@ -74,7 +72,6 @@ public class FileController {
 		}
 		catch (NotSupportedException | IOException e)
 		{
-			// TODO
 		}
 		
 		try
@@ -83,7 +80,6 @@ public class FileController {
 		}
 		catch (IOException e)
 		{
-			// TODO
 		}
 		
 		String Remove = "\\" + NewName;
@@ -101,7 +97,6 @@ public class FileController {
 		}
 		catch (NotSupportedException | IOException e)
 		{
-			// TODO
 		}
 		
 		if(!(NewLocation.exists()))
@@ -115,7 +110,6 @@ public class FileController {
 		}
 		catch (IOException e)
 		{
-			// TODO
 		}
 		
 		String Remove = "\\" + NewName;

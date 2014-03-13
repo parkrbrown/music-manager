@@ -28,14 +28,8 @@ public class FilenameFormatter extends FileController {
 			try {
 				mp3 = new Mp3File(mp3s.get(i).getAbsolutePath());
 			} catch (UnsupportedTagException exception) {
-				// TODO Auto-generated catch block
-				exception.printStackTrace();
 			} catch (InvalidDataException exception) {
-				// TODO Auto-generated catch block
-				exception.printStackTrace();
 			} catch (IOException exception) {
-				// TODO Auto-generated catch block
-				exception.printStackTrace();
 			}
 			
 			StringBuffer NewName = new StringBuffer();

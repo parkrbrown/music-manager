@@ -51,15 +51,12 @@ public class FileOrganizer extends FileController {
 			}
 			catch (UnsupportedTagException e)
 			{
-				// TODO Auto-generated catch block
 			}
 			catch (InvalidDataException e)
 			{
-				// TODO Auto-generated catch block
 			}
 			catch (IOException e)
 			{
-				// TODO Auto-generated catch block
 			}
 			
 			ID3v2 CurTag = tempMp3.getId3v2Tag();
@@ -107,14 +104,8 @@ public class FileOrganizer extends FileController {
 			try {
 				MainController.FileController.saveFile((new File(temp.getAbsolutePath())), (new File(MainController.CurrentDirectory.getAbsolutePath())), (new Mp3File(temp.getAbsolutePath())), test);
 			} catch (UnsupportedTagException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (InvalidDataException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 	}
@@ -174,15 +165,12 @@ public class FileOrganizer extends FileController {
 //			}
 //			catch (UnsupportedTagException e)
 //			{
-//				// TODO Auto-generated catch block
 //			}
 //			catch (InvalidDataException e)
 //			{
-//				// TODO Auto-generated catch block
 //			}
 //			catch (IOException e)
 //			{
-//				// TODO Auto-generated catch block
 //			}
 //			
 //			boolean InList = false;
@@ -240,115 +228,4 @@ public class FileOrganizer extends FileController {
 //		}
 //		return FoldersToMake;
 //	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/******************************************************************************************************************************************************
-//	public void moveFile(/*String oldPath, String newPath/){
-//		// TODO move file from oldPath to newPath
-//		// For an individual file
-//		
-//		//or use Files.move()
-//	}
-	
-	private void verifyNoMp3sFound() /* TODO throws Exception / {
-		ArrayList<File> nonMp3Files = findNonMP3s();
-		
-		if (nonMp3Files.size() > 0) {
-			System.out.println(nonMp3Files.get(0).getName() + ", make sure all files other than .mp3 are removed from this directory.");
-			//throw new nonMP3FileException
-		}
-	}
-	
-	private ArrayList<File> findNonMP3s() {
-		//Filter files by .mp3 extension
-		FilenameFilter mp3Filter = new FilenameFilter() {
-			public boolean accept(File dir, String name) {
-				return !(name.endsWith(".mp3"));
-    		}
-		};
-
-		File directory = new File(MainController.CurrentDirectory.toString());
-		//Add all files in directory to an array
-		File[] fileList = directory.listFiles(); 
-		ArrayList<File> mp3Files = new ArrayList<File>();
-
-    	if(fileList == null){
-    		//TODO Give alert		System.out.println("Directory not found: " + directory);
-    	}else if(fileList.length == 0){
-    		//TODO Give alert		System.out.println("Empty directory: " + directory);
-    	}else{
-
-			//Go through all files in the fileList and add .mp3 files to the ArrayList
-			for (File file : fileList){
-				if (file.isFile()){
-					if(mp3Filter.accept(directory,file.getName())){
-						mp3Files.add(file);
-					}
-				//If a sub-directory is found, search for mp3s in that directory
-				} else if (file.isDirectory()){
-					findMP3s(MainController.CurrentDirectory.getAbsoluteFile());
-				}
-			}
-    	}
-    	return mp3Files;
-    }
-	
-	public void moveFilesToRoot(){
-		//TODO
-		for(int i = 0; i < fileList.size(); i++){
-			try{
-				File fileToMove = new File(fileList.get(i).getAbsolutePath());
-				
-				if(fileToMove.renameTo(new File(rootDirectory + fileToMove.getName()))){
-					System.out.println(fileToMove.getAbsolutePath() + " successfully moved.");
-				}else{
-					System.out.println(fileToMove.getAbsolutePath() + " move unsuccessful.");
-				}
-			}catch(Exception e){
-				e.getMessage();
-			}
-		} 
-	}
-	
-	public void deleteEmptyFolders(){
-		//TODO
-		//findDirectories()
-		//check to see if dir.isEmpty()
-			//if !empty ignore dir and move to the next
-		//file.delete()
-	
-	}
-	
-	public void createDirectories(){
-		ArrayList<String> foldersToCreate = MainController.FFSW.getFormatOrder();
-		ArrayList<File> mp3s = findMP3s(MainController.CurrentDirectory.getAbsoluteFile());
-	}
-	
-	public void moveFromRootToNewDir(){
-		
-	}
-	
-	public void scanId3Tags(){
-		
-	}
-	
-
-	
-	
-	
-	
-	
-	
-	******************************************************************************************************************************************************/
 }
