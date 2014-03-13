@@ -22,12 +22,27 @@ public class FileOrganizer extends FileController {
 		PullFilesFromSubs();
 		DeleteSubs(MainController.CurrentDirectory);
 		ArrayList<String> OrganizationOrder = MainController.OSSW.getOrganizationOrder();
-//		ArrayList<String> FoldersToMake = FindFolders(MainController.CurrentDirectory, OrganizationOrder.get(0));
 		File[] FilesInMainDir = MainController.CurrentDirectory.listFiles();
-//		ArrayList<Mp3File> Mp3sBeforeRename = new ArrayList<>();
-//		ArrayList<Mp3File> Mp3sAfterRename = new ArrayList<>();
+		ArrayList<File> MP3sInMainDir = new ArrayList<>();
 		
-		for(File temp : FilesInMainDir)
+		for(File curFile : FilesInMainDir)
+		{
+			if(curFile.isFile())
+			{
+				MP3sInMainDir.add(curFile);
+			}
+			else
+			{
+				ArrayList<File> FoundFiles = new ArrayList<>();
+				FoundFiles = findMP3s(curFile.getAbsoluteFile());
+				for(File cur : FoundFiles)
+				{
+					MP3sInMainDir.add(cur);
+				}
+			}
+		}
+		
+		for(File temp : MP3sInMainDir)
 		{
 			Mp3File tempMp3 = null;
 			try
@@ -84,13 +99,13 @@ public class FileOrganizer extends FileController {
 	
 	private void PullFilesFromSubs()
 	{
-		ArrayList<File> mp3s = MainController.FileController.findMP3s(MainController.CurrentDirectory);
+		ArrayList<File> mp3s = findMP3s(MainController.CurrentDirectory);
 		for(File temp : mp3s)
 		{
 			StringBuffer test = new StringBuffer();
 			test.append(temp.getName());
 			try {
-				MainController.FileController.saveFile(temp, (new File("E:\\")), (new Mp3File(temp.getAbsolutePath())), test);
+				MainController.FileController.saveFile((new File(temp.getAbsolutePath())), (new File(MainController.CurrentDirectory.getAbsolutePath())), (new Mp3File(temp.getAbsolutePath())), test);
 			} catch (UnsupportedTagException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -112,7 +127,7 @@ public class FileOrganizer extends FileController {
 			if(CurFile.isDirectory())
 			{
 				File[] FilesInSub = CurFile.listFiles();
-				if(!(FilesInSub.length != 0))
+				if(!(FilesInSub.length != 0))//TODO
 				{
 					for(File temp : FilesInSub)
 					{
