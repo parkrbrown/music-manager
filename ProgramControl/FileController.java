@@ -106,7 +106,7 @@ public class FileController {
 		
 		try
 		{
-			Files.move((Paths.get(CurrentFile.getAbsolutePath())), (Paths.get(NewLocation.getAbsolutePath() + CurrentFile.getName())), REPLACE_EXISTING);
+			Files.move((Paths.get(CurrentFile.getAbsolutePath())), (Paths.get(NewLocation.getAbsolutePath()/* + CurrentFile.getName()*/)), REPLACE_EXISTING);
 		}
 		catch (IOException e)
 		{

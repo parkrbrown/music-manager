@@ -18,7 +18,6 @@ public class FileOrganizer extends FileController {
 	//Starting Method
 	public void Organize()
 	{
-		//"Album", "Artist", "Genre", "Year"
 		PullFilesFromSubs();
 		DeleteSubs(MainController.CurrentDirectory);
 		ArrayList<String> OrganizationOrder = MainController.OSSW.getOrganizationOrder();
@@ -100,9 +99,9 @@ public class FileOrganizer extends FileController {
 		for(File temp : mp3s)
 		{
 			StringBuffer test = new StringBuffer();
-			test.append(temp.getName());
+			test.append("\\" + temp.getName());
 			try {
-				saveFile((new File(temp.getAbsolutePath())), (new File(MainController.CurrentDirectory.getAbsolutePath())), (new Mp3File(temp.getAbsolutePath())), test);
+				saveFile((new File(temp.getAbsolutePath())), (MainController.CurrentDirectory), (new Mp3File(temp.getAbsolutePath())), test, true);
 			} catch (UnsupportedTagException e) {
 			} catch (InvalidDataException e) {
 			} catch (IOException e) {
