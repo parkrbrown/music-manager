@@ -88,7 +88,7 @@ public class FilenameFormatter extends FileController {
 			NewName.delete((NewName.length() - 3), NewName.length());
 			String NewFileName = MainController.CurrentDirectory + "\\" + (NewName.toString()) + ".mp3";
 			
-			MainController.FileController.saveFile((new File(mp3s.get(i).getAbsolutePath())), (new File(NewFileName)), mp3, NewName);
+			saveFile((new File(mp3s.get(i).getAbsolutePath())), (new File(NewFileName)), mp3, NewName);
 		}
 	}
 }

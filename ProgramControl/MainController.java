@@ -29,7 +29,6 @@ public class MainController {
     public static JFrame ReferenceFrame = new JFrame();
 
     //File Controllers for Program
-    public static FileController FileController = new FileController();
     public static FilenameFormatter FNF = new FilenameFormatter();
     public static FileOrganizer FO = new FileOrganizer();
     public static TagEditor TE = new TagEditor();
