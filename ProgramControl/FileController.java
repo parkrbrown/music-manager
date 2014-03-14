@@ -47,7 +47,6 @@ public class FileController {
 		}
 		catch (NotSupportedException | IOException e)
 		{
-			// TODO
 		}
 		
 		try
@@ -56,7 +55,6 @@ public class FileController {
 		}
 		catch (IOException e)
 		{
-			// TODO
 		}
 		
 		String Remove = "\\" + CurrentFile.getName();
@@ -70,20 +68,18 @@ public class FileController {
     	try
 		{
 			Mp3File Moving = FileToSave;
-			Moving.save((NewName.toString()));
+			Moving.save((NewName.toString())/* + ".mp3"*/);
 		}
 		catch (NotSupportedException | IOException e)
 		{
-			// TODO
 		}
 		
 		try
 		{
-			Files.move((Paths.get(CurrentFile.getAbsolutePath())), (Paths.get(NewLocation.getAbsolutePath() + CurrentFile.getName())), REPLACE_EXISTING);
+			Files.move((Paths.get(CurrentFile.getAbsolutePath())), (Paths.get(NewLocation.getAbsolutePath())), REPLACE_EXISTING);
 		}
 		catch (IOException e)
 		{
-			// TODO
 		}
 		
 		String Remove = "\\" + NewName;
@@ -101,7 +97,6 @@ public class FileController {
 		}
 		catch (NotSupportedException | IOException e)
 		{
-			// TODO
 		}
 		
 		if(!(NewLocation.exists()))
@@ -111,11 +106,10 @@ public class FileController {
 		
 		try
 		{
-			Files.move((Paths.get(CurrentFile.getAbsolutePath())), (Paths.get(NewLocation.getAbsolutePath() + CurrentFile.getName())), REPLACE_EXISTING);
+			Files.move((Paths.get(CurrentFile.getAbsolutePath())), (Paths.get(NewLocation.getAbsolutePath()/* + CurrentFile.getName()*/)), REPLACE_EXISTING);
 		}
 		catch (IOException e)
 		{
-			// TODO
 		}
 		
 		String Remove = "\\" + NewName;

@@ -28,14 +28,8 @@ public class FilenameFormatter extends FileController {
 			try {
 				mp3 = new Mp3File(mp3s.get(i).getAbsolutePath());
 			} catch (UnsupportedTagException exception) {
-				// TODO Auto-generated catch block
-				exception.printStackTrace();
 			} catch (InvalidDataException exception) {
-				// TODO Auto-generated catch block
-				exception.printStackTrace();
 			} catch (IOException exception) {
-				// TODO Auto-generated catch block
-				exception.printStackTrace();
 			}
 			
 			StringBuffer NewName = new StringBuffer();
@@ -94,7 +88,7 @@ public class FilenameFormatter extends FileController {
 			NewName.delete((NewName.length() - 3), NewName.length());
 			String NewFileName = MainController.CurrentDirectory + "\\" + (NewName.toString()) + ".mp3";
 			
-			MainController.FileController.saveFile((new File(mp3s.get(i).getAbsolutePath())), (new File(NewFileName)), mp3, NewName);
+			saveFile((new File(mp3s.get(i).getAbsolutePath())), (new File(NewFileName)), mp3, NewName);
 		}
 	}
 }

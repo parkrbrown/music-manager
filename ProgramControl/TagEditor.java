@@ -4,9 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import mp3agic.ID3v1Tag;
 import mp3agic.ID3v2;
-import mp3agic.ID3v24Tag;
 import mp3agic.InvalidDataException;
 import mp3agic.Mp3File;
 import mp3agic.UnsupportedTagException;
@@ -40,14 +38,8 @@ public class TagEditor extends FileController {
             try {
                 temp = new Mp3File(fileList.get(count).getAbsolutePath());
             } catch (UnsupportedTagException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
             } catch (InvalidDataException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
             }
             mp3List.add(temp);
         }

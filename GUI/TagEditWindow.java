@@ -4,7 +4,6 @@ import ProgramControl.MainController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -27,7 +26,7 @@ public class TagEditWindow extends JFrame implements ActionListener {
     private JMenu File, Edit, View, Help;
     private JTextArea CurrentDirectory;
     private JLabel CurDir;
-    private JButton Browse, Cancel, Confirm;
+    private JButton Browse, Return, Confirm;
     private JCheckBox Artist, Album, Genre;
     private JTextArea TArtist, TAlbum;
     private JComboBox GenreSelection;
@@ -59,7 +58,7 @@ public class TagEditWindow extends JFrame implements ActionListener {
         this.GenreSelection = new JComboBox(mp3agic.ID3v1Genres.GENRES);
         GenreSelection.setEditable(false);
 
-        this.Cancel = new JButton("Cancel");
+        this.Return = new JButton("Return");
         this.Confirm = new JButton("Confirm");
 
         //Adds the Action Listener to each element that requires one
@@ -68,7 +67,7 @@ public class TagEditWindow extends JFrame implements ActionListener {
         this.Album.addActionListener(this);
         this.Genre.addActionListener(this);
         this.Confirm.addActionListener(this);
-        this.Cancel.addActionListener(this);
+        this.Return.addActionListener(this);
 
         //Sets the location for each element
         this.CurrentDirectory.setBounds(15, 25, 325, 18);
@@ -80,7 +79,7 @@ public class TagEditWindow extends JFrame implements ActionListener {
         this.TArtist.setBounds(85, 82, 150, 20);
         this.TAlbum.setBounds(85, 132, 150, 20);
         this.GenreSelection.setBounds(85, 182, 150, 20);
-        this.Cancel.setBounds(280, 222, 85, 35);
+        this.Return.setBounds(280, 222, 85, 35);
         this.Confirm.setBounds(370, 222, 85, 35);
 
         //Adds each Menu Bar element to the Menu Bar
@@ -100,7 +99,7 @@ public class TagEditWindow extends JFrame implements ActionListener {
         this.add(TArtist);
         this.add(TAlbum);
         this.add(GenreSelection);
-        this.add(Cancel);
+        this.add(Return);
         this.add(Confirm);
 
         //Sets the window title, size, default for closing & sets it to open in the middle of the screen
@@ -110,7 +109,8 @@ public class TagEditWindow extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
     }
 
-    @Override
+    @SuppressWarnings("unused")
+	@Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == Browse) {
             int Location = MainController.FileChooser.showOpenDialog(MainController.ReferenceFrame);
@@ -119,7 +119,7 @@ public class TagEditWindow extends JFrame implements ActionListener {
             }
             this.CurrentDirectory.setText(MainController.CurrentDirectory.toString());
         }
-        else if (event.getSource() == Cancel) {
+        else if (event.getSource() == Return) {
             MainController.TEW.setVisible(false);
             MainController.MainMenu.setEnabled(true);
         }

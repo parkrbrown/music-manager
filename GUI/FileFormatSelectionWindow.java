@@ -33,8 +33,6 @@ public class FileFormatSelectionWindow extends JFrame implements ActionListener 
     private JList Sort, Ignore;
     private ArrayList<String> SortItems, IgnoreItems;
 
-    //TODO Make a done button; require JCheck title to always be selected
-    //TODO Make an example string of how the file format will look once the user has selected their preferences. i.e. "Sample Output: 'album-artist-song title.mp3'"
     public FileFormatSelectionWindow() {
         this.setLayout(null);
 
