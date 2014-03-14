@@ -42,7 +42,7 @@ public class Derek_TestClass {
 			System.out.println("Directory doesn't exist: " + rootDirectory);
 		}else if(directory.list().length != 0){
 			System.out.println(" Directory isn't empty: " + directory.getAbsolutePath());
-			directory.
+			
 			
 			}else{
 				directory.delete();
