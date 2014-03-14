@@ -4,6 +4,7 @@ import ProgramControl.MainController;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -108,7 +109,8 @@ public class TagEditWindow extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
     }
 
-    @Override
+    @SuppressWarnings("unused")
+	@Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == Browse) {
             int Location = MainController.FileChooser.showOpenDialog(MainController.ReferenceFrame);

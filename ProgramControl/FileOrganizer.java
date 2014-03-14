@@ -117,7 +117,7 @@ public class FileOrganizer extends FileController {
 			if(CurFile.isDirectory())
 			{
 				File[] FilesInSub = CurFile.listFiles();
-				if(!(FilesInSub.length != 0))//TODO
+				if(FilesInSub.length == 0)//TODO
 				{
 					for(File temp : FilesInSub)
 					{
